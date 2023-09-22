@@ -13,6 +13,7 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.generateEnemies(3, Chicken);
+    this.generateEnemies(1, Endboss);
     this.setWorld();
   }
 
