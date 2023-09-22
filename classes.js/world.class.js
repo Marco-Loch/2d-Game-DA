@@ -1,8 +1,7 @@
 class World {
   character = new Character(150, 200);
-  enemies = LEVEL1.enemys;
-  clouds = LEVEL1.clouds;
-  backgroundObjects = LEVEL1.backgroundObjects;
+  level = LEVEL1;
+
   canvas;
   keyboard;
   ctx;
@@ -22,9 +21,9 @@ class World {
 
     this.ctx.translate(this.camara_x, 0);
 
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addObjectsToMap(this.clouds);
-    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
 
     this.ctx.translate(-this.camara_x, 0);
@@ -40,7 +39,7 @@ class World {
   generateEnemies(count, enemyClass) {
     for (let i = 0; i < count; i++) {
       const positionX = Math.random() * 500 + 400;
-      this.enemies.push(new enemyClass(positionX, 374));
+      this.level.enemies.push(new enemyClass(positionX, 374));
     }
   }
 

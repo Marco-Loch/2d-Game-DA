@@ -27,7 +27,12 @@ class MovableObject {
     });
   }
 
-  
+  playAnimation(){
+    let i = this.currentImage % this.IMAGES_WALK.length;
+    let path = this.IMAGES_WALK[i];
+    this.img = this.imgCache[path];
+    this.currentImage++;
+  }
 
   moveLeft(){
     setInterval(() => {
