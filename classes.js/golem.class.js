@@ -1,4 +1,4 @@
-class Chicken extends MovableObject {
+class Golem extends MovableObject {
   y = 250;
   IMAGES_WALK = [
     'img/3_enemies_golem/golem_normal/1_walk/1_w.png',
@@ -32,7 +32,7 @@ class Chicken extends MovableObject {
   otherDirection = true;
 
   constructor(x, y, height = 200, width = 180) {
-    super(x, y).loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+    super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALK);
     this.speed = this.minSpeed + Math.random() * this.maxSpeed;
     this.height = height;
@@ -47,7 +47,5 @@ class Chicken extends MovableObject {
     this.moveLeft();
   }
 
-  chickenDie() {
-    console.log('Chicken dieing');
-  }
+  
 }
