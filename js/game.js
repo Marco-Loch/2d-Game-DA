@@ -12,7 +12,6 @@ function init() {
   world = new World(canvas, keyboard);
 }
 
-
 document.addEventListener('keydown', (event) => {
   if (event.keyCode == 68) {
     keyboard.RIGHT = true;
@@ -26,7 +25,6 @@ document.addEventListener('keydown', (event) => {
   if (event.keyCode == 13) {
     keyboard.ENTER = true;
   }
-  console.log(event);
 });
 
 document.addEventListener('keyup', (event) => {
@@ -42,5 +40,4 @@ document.addEventListener('keyup', (event) => {
   if (event.keyCode == 13) {
     keyboard.ENTER = false;
   }
-
 });

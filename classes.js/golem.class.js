@@ -1,5 +1,5 @@
 class Golem extends MovableObject {
-  y = 250;
+  y = 265;
   IMAGES_WALK = [
     'img/3_enemies_golem/golem_normal/1_walk/1_w.png',
     'img/3_enemies_golem/golem_normal/1_walk/2_w.png',
@@ -31,7 +31,7 @@ class Golem extends MovableObject {
   maxSpeed = 0.4;
   otherDirection = true;
 
-  constructor(x, y, height = 200, width = 180) {
+  constructor(x, y, height = 230, width = 210) {
     super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALK);
     this.speed = this.minSpeed + Math.random() * this.maxSpeed;
@@ -44,8 +44,8 @@ class Golem extends MovableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALK);
     }, 1000 / 20);
-    this.moveLeft();
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
   }
-
-  
 }

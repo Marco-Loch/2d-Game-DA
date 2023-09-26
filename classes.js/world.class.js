@@ -1,5 +1,6 @@
 class World {
   character = new Character(150, 200);
+  ground = new Ground();
   level = LEVEL1;
 
   canvas;
@@ -23,9 +24,9 @@ class World {
     this.ctx.translate(this.camara_x, 0);
 
     this.addObjectsToMap(this.level.backgroundObjects);
-    this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
+    this.addObjectsToMap(this.level.grounds);
 
     this.ctx.translate(-this.camara_x, 0);
 
@@ -46,6 +47,7 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.ground.world = this;
   }
 
   addObjectsToMap(objects) {
@@ -53,17 +55,27 @@ class World {
       this.addToMap(o);
     });
   }
+
   addToMap(mo) {
     if (mo.otherDirection) {
-      this.ctx.save();
-      this.ctx.translate(mo.width, 0);
-      this.ctx.scale(-1, 1);
-      mo.x = mo.x * -1;
+      this.flipImage(mo);
     }
-    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     if (mo.otherDirection) {
-      mo.x = mo.x * -1;
-      this.ctx.restore();
+      this.flipImageBack(mo);
     }
+    mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
+  }
+
+  flipImage(mo) {
+    this.ctx.save();
+    this.ctx.translate(mo.width, 0);
+    this.ctx.scale(-1, 1);
+    mo.x = mo.x * -1;
+  }
+  
+  flipImageBack(mo){
+    mo.x = mo.x * -1;
+    this.ctx.restore();
   }
 }

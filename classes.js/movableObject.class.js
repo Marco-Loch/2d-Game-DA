@@ -5,7 +5,7 @@ class MovableObject {
   currentImage = 0;
   otherDirection = false;
   speedY = 0;
-  acceleration = 2.5;
+  acceleration = 2;
 
   constructor(x, y) {
     this.x = x;
@@ -13,7 +13,16 @@ class MovableObject {
   }
 
   applyGravity() {
-    setInterval(() => {}, 1000 / 25);
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      }
+    }, 1000 / 25);
+  }
+
+  isAboveGround() {
+    return this.y < 245;
   }
 
   loadImage(path) {
@@ -40,9 +49,42 @@ class MovableObject {
     this.currentImage++;
   }
 
+  playJumpAnimation(images) {
+    let i = this.currentImage % this.IMAGES_JUMP.length;
+    let path = images[i];
+    this.img = this.imgCache[path];
+    this.currentImage++;
+  }
+  
+  playFallAnimation(images) {
+    let i = this.currentImage % this.IMAGES_FALL.length;
+    let path = images[i];
+    this.img = this.imgCache[path];
+    this.currentImage++;
+  }
+
+  draw(ctx){
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  drawFrame(ctx){
+    ctx.beginPath();
+    ctx.lineWidth = '5';
+    ctx.strokeStyle = 'blue';
+    ctx.rect(this.x+60, this.y+50, this.width-130, this.height-100)
+    ctx.stroke();
+  }
+
   moveLeft() {
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60);
+    this.x -= this.speed;
+    this.otherDirection = true;
+  }
+  jump(){
+    this.speedY = 25;
+  }
+  moveRight(){
+    this.x += this.speed;
+    this.otherDirection = false;
+ 
   }
 }

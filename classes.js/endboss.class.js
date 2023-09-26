@@ -32,7 +32,7 @@ class Endboss extends MovableObject {
   y = 0;
   otherDirection = true;
 
-  constructor(x, y, height = 500, width = 450) {
+  constructor(x, y, height = 550, width = 500) {
     super(x, y).loadImage(this.IMAGES_WALK[0]);
     this.loadImages(this.IMAGES_WALK);
     this.height = height;
@@ -44,7 +44,7 @@ class Endboss extends MovableObject {
   animate() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALK);
-    }, 1000 / 12);
+    }, 1000 / 24);
     this.moveLeft();
   }
 }
