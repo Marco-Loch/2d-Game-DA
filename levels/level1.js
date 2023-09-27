@@ -1,10 +1,14 @@
 const LEVEL1 = new Level(
   [],
   [
-    new Ground(-720, globalThis.keyboard), 
-    new Ground(0, globalThis.keyboard), 
-    new Ground(720, globalThis.keyboard), 
-    new Ground(720 * 2, globalThis.keyboard), 
+    new Ground(-720 * 5, globalThis.keyboard),
+    new Ground(-720 * 4, globalThis.keyboard),
+    new Ground(-720 * 3, globalThis.keyboard),
+    new Ground(-720 * 2, globalThis.keyboard),
+    new Ground(-720, globalThis.keyboard),
+    new Ground(0, globalThis.keyboard),
+    new Ground(720, globalThis.keyboard),
+    new Ground(720 * 2, globalThis.keyboard),
     new Ground(720 * 3, globalThis.keyboard)
   ],
   [

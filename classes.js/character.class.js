@@ -195,7 +195,7 @@ class Character extends MovableObject {
     }, 1000 / 30);
   }
 
-
+  // Angriffsanimation bis zum Ende abspielen
   isAttacking() {
     if (this.world.keyboard.ENTER && !this.attacking) {
       this.attacking = true;
