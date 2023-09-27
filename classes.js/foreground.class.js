@@ -1,15 +1,14 @@
 class Ground extends MovableObject {
   world;
-  x = 0;
   y = 15;
   height = 480;
   width = 720;
   speed = 5;
 
-  constructor() {
-    super().loadImage('img/5_background/layers/1_first_layer/Ground.png');
+  constructor(x) {
+    super(x).loadImage('img/5_background/layers/1_first_layer/Ground.png');
 
-    // this.x = Math.random() * 500;
+    this.x = x;
     // this.animate();
   }
 

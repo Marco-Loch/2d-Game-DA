@@ -66,6 +66,7 @@ class Character extends MovableObject {
   IDLE;
   speed = 4;
   walking_sound = new Audio('audio/walking.mp3');
+  energy = 100;
 
   constructor(x, y, height = 250, width = 250) {
     super(x, y).loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
