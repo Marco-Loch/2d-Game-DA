@@ -1,8 +1,8 @@
 class World {
   character = new Character(150, 200);
-  ground = new Ground();
+  foreground;
   level = LEVEL1;
-
+  // gui = new StatusBarBackground();
   canvas;
   keyboard;
   ctx;
@@ -12,9 +12,10 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.foreground = new Ground(0, this.keyboard);
     this.draw();
-    this.generateEnemies(3, Golem);
-    this.generateEnemies(1, Endboss);
+    this.generateEnemies(4, Golem);
+    this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.checkCollisions();
   }
@@ -28,6 +29,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
+    // this.addObjectsToMap(this.gui);
 
     this.ctx.translate(-this.camara_x, 0);
 
@@ -51,16 +53,16 @@ class World {
     }, 100);
   }
 
-  generateEnemies(count, enemyClass) {
+  generateEnemies(count, enemyClass, character = null) {
     for (let i = 0; i < count; i++) {
-      const positionX = Math.random() * 500 + 400;
-      this.level.enemies.push(new enemyClass(positionX, 374));
+      const positionX = Math.random() * 500 + 800;
+      this.level.enemies.push(new enemyClass(positionX, 374, character));
     }
   }
 
   setWorld() {
     this.character.world = this;
-    this.ground.world = this;
+
   }
 
   addObjectsToMap(objects) {
@@ -75,7 +77,8 @@ class World {
     }
 
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
+
+    // mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

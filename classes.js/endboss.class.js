@@ -1,7 +1,5 @@
 class Endboss extends MovableObject {
-  IMAGES_ALERT = [
-
-  ];
+  IMAGES_ALERT = [];
 
   IMAGES_WALK = [
     'img/4_enemie_boss_minotaur/1_walk/G1.png',
@@ -29,22 +27,49 @@ class Endboss extends MovableObject {
     'img/4_enemie_boss_minotaur/1_walk/G23.png',
     'img/4_enemie_boss_minotaur/1_walk/G24.png'
   ];
+
+  IMAGES_ATTACK = [
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_000.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_001.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_002.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_003.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_004.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_005.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_006.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_007.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_008.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_009.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_010.png',
+    'img/4_enemie_boss_minotaur/3_attack/0_Minotaur_Slashing_011.png'
+  ];
+
   y = 0;
   otherDirection = true;
 
-  constructor(x, y, height = 550, width = 500) {
+  constructor(x, y, character, height = 550, width = 500) {
     super(x, y).loadImage(this.IMAGES_WALK[0]);
     this.loadImages(this.IMAGES_WALK);
+    this.loadImages(this.IMAGES_ATTACK);
     this.height = height;
     this.width = width;
-    this.x = 700;
+    this.character = character;
+    this.x = 2000;
     this.animate();
   }
 
   animate() {
+    // setInterval(() => {
+    //   this.playAnimation(this.IMAGES_WALK);
+    //   this.moveLeft();
+    // }, 1000 / 30);
+
     setInterval(() => {
-      this.playAnimation(this.IMAGES_WALK);
-    }, 1000 / 24);
-    this.moveLeft();
+      if (this.isColliding(this.character)) {
+        this.playAnimation(this.IMAGES_ATTACK);
+      } else {
+        this.playAnimation(this.IMAGES_WALK);
+        this.moveLeft();
+      }
+    }, 1000 / 30);
   }
 }

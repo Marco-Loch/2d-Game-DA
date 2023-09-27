@@ -1,6 +1,6 @@
 let canvas;
 let world;
-let keyboard = new Keyboard();
+globalThis.keyboard = new Keyboard();
 
 document.addEventListener('DOMContentLoaded', function () {
   init();
@@ -9,35 +9,35 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
   globalThis.frame = 1;
   canvas = document.getElementById('canvas');
-  world = new World(canvas, keyboard);
+  world = new World(canvas, globalThis.keyboard);
 }
 
 document.addEventListener('keydown', (event) => {
   if (event.keyCode == 68) {
-    keyboard.RIGHT = true;
+    globalThis.keyboard.RIGHT = true;
   }
   if (event.keyCode == 65) {
-    keyboard.LEFT = true;
+    globalThis.keyboard.LEFT = true;
   }
   if (event.keyCode == 32) {
-    keyboard.SPACE = true;
+    globalThis.keyboard.SPACE = true;
   }
   if (event.keyCode == 13) {
-    keyboard.ENTER = true;
+    globalThis.keyboard.ENTER = true;
   }
 });
 
 document.addEventListener('keyup', (event) => {
   if (event.keyCode == 68) {
-    keyboard.RIGHT = false;
+    globalThis.keyboard.RIGHT = false;
   }
   if (event.keyCode == 65) {
-    keyboard.LEFT = false;
+    globalThis.keyboard.LEFT = false;
   }
   if (event.keyCode == 32) {
-    keyboard.SPACE = false;
+    globalThis.keyboard.SPACE = false;
   }
   if (event.keyCode == 13) {
-    keyboard.ENTER = false;
+    globalThis.keyboard.ENTER = false;
   }
 });

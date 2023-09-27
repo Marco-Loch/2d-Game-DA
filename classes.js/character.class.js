@@ -67,7 +67,15 @@ class Character extends MovableObject {
     'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_003.png',
     'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_004.png',
     'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_005.png',
-    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_006.png'
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_006.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_007.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_008.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_009.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_010.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_011.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_012.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_013.png',
+    'img/2_character_pepe/5_dead/0_Reaper_Man_Dying_014.png'
   ];
   IMAGES_HURT = [
     'img/2_character_pepe/4_hurt/0_Reaper_Man_Hurt_000.png',
@@ -83,14 +91,29 @@ class Character extends MovableObject {
     'img/2_character_pepe/4_hurt/0_Reaper_Man_Hurt_010.png',
     'img/2_character_pepe/4_hurt/0_Reaper_Man_Hurt_011.png'
   ];
-
-  y = 120;
+  IMAGES_ATTACK = [
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_000.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_001.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_002.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_003.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_004.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_005.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_006.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_007.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_008.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_009.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_010.png',
+    'img/2_character_pepe/6_attack/0_Reaper_Man_Slashing_011.png'
+  ];
+  y = 245;
   currentImage = 0;
   world;
   IDLE;
   speed = 4;
   walking_sound = new Audio('audio/walking.mp3');
   energy = 100;
+  attacking = false;
+  attackframe = 0;
 
   constructor(x, y, height = 250, width = 250) {
     super(x, y).loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
@@ -102,6 +125,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_WALK);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_ATTACK);
     this.applyGravity();
     this.animate();
   }
@@ -122,8 +146,35 @@ class Character extends MovableObject {
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
       }
-      this.world.camara_x = -this.x + 200;
+      this.world.camara_x = -this.x + 100;
     }, 1000 / 60);
+
+  //   if (this.isDead()) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_DEAD);
+  //     }, 1000);
+  //   } else if (this.isHurt()) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_HURT);
+  //     }, 1000);
+  //   } else if (this.isAboveGround() && this.speedY > 0) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_JUMP);
+  //     }, 1000);
+  //   } else if (this.isAboveGround() && this.speedY < 0) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_FALL);
+  //     }, 1000);
+  //   } else if (this.world.keyboard.ENTER) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_ATTACK);
+  //     }, 1000);
+  //   } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+  //     setInterval(() => {
+  //       this.playAnimation(this.IMAGES_WALK);
+  //     }, 1000 / 60);
+  //   }
+  // }
 
     setInterval(() => {
       if (this.isDead()) {
@@ -134,13 +185,30 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_JUMP);
       } else if (this.isAboveGround() && this.speedY < 0) {
         this.playAnimation(this.IMAGES_FALL);
+      } else if (this.isAttacking()) {
+        this.playAnimation(this.IMAGES_ATTACK, this.attackframe);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_WALK);
+      } else {
+        this.playAnimation(this.IMAGES_IDLE);
       }
-    }, 1000 / 60);
+    }, 1000 / 30);
   }
 
-  attack() {
-    console.log('Attacking');
+
+  isAttacking() {
+    if (this.world.keyboard.ENTER && !this.attacking) {
+      this.attacking = true;
+      this.attackframe = 0;
+    }
+
+    this.attackframe++;
+
+    if (this.attackframe >= this.IMAGES_ATTACK.length) {
+      this.attacking = false;
+      this.attackframe = null;
+    }
+    return this.attacking;
+
   }
 }
