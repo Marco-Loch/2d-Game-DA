@@ -1,6 +1,9 @@
 class World {
   character = new Character(150, 200);
+  ground;
   foreground;
+  middleDecor;
+
   level = LEVEL1;
   // gui = new StatusBarBackground();
   canvas;
@@ -12,9 +15,11 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.foreground = new Ground(0, this.keyboard);
+    this.ground = new Ground(0);
+    this.foreground = new Foreground(0);
+    this.middleDecor = new MiddleDecor(0);
     this.draw();
-    this.generateEnemies(4, Golem);
+    this.generateEnemies(4, Golem, this.character);
     this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.checkCollisions();
@@ -26,6 +31,9 @@ class World {
     this.ctx.translate(this.camara_x, 0);
 
     this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.middleDecor);
+    this.addObjectsToMap(this.level.foregrounds);
+
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
@@ -77,7 +85,7 @@ class World {
 
     mo.draw(this.ctx);
 
-    // mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
+    mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);
