@@ -19,7 +19,7 @@ class World {
     this.foreground = new Foreground(0);
     this.middleDecor = new MiddleDecor(0);
     this.draw();
-    this.generateEnemies(4, Golem, this.character);
+    this.generateEnemies(4, Golem);
     this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.checkCollisions();

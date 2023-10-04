@@ -8,6 +8,8 @@ class MovableObject extends DrawableObject {
   offsetWidth = 130;
   offsetHeight = 100;
   lastHit = 0;
+  attacking = false;
+  attackframe = null;
 
   constructor(x, y) {
     super();
@@ -75,7 +77,7 @@ class MovableObject extends DrawableObject {
 
   hit() {
     this.energy -= 5;
-    this.x -= 25;
+    // this.x -= 25;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
