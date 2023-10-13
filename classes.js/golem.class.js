@@ -26,26 +26,60 @@ class Golem extends MovableObject {
     'img/3_enemies_golem/golem_normal/1_walk/23_w.png',
     'img/3_enemies_golem/golem_normal/1_walk/24_w.png'
   ];
+  IMAGES_ATTACK = [
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_000.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_001.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_002.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_003.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_004.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_005.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_006.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_007.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_008.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_009.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_010.png',
+    'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_011.png'
+  ];
   currentImage = 0;
   minSpeed = 0.1;
   maxSpeed = 0.4;
   otherDirection = true;
 
-  constructor(x, y, height = 230, width = 210) {
+  constructor(x, y, character, height = 230, width = 210) {
     super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALK);
+    this.loadImages(this.IMAGES_ATTACK);
     this.speed = this.minSpeed + Math.random() * this.maxSpeed;
     this.height = height;
     this.width = width;
+    this.character = character;
     this.animate();
   }
 
   animate() {
     setInterval(() => {
-      this.playAnimation(this.IMAGES_WALK);
-    }, 1000 / 20);
-    setInterval(() => {
-      this.moveLeft();
-    }, 1000 / 60);
+      if (this.isColliding(this.character) || this.attacking) {
+        this.playAnimation(this.IMAGES_ATTACK, this.attackframe);
+        this.isAttacking();
+      } else {
+        this.playAnimation(this.IMAGES_WALK);
+        this.moveLeft();
+      }
+    }, 1000 / 30);
+  }
+
+  isAttacking() {
+    if (!this.attacking) {
+      this.attacking = true;
+      this.attackframe = 0;
+    }
+
+    this.attackframe++;
+
+    if (this.attackframe >= this.IMAGES_ATTACK.length) {
+      this.attacking = false;
+      this.attackframe = 0;
+    }
+    return this.attacking;
   }
 }

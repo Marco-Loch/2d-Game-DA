@@ -3,7 +3,6 @@ class DrawableObject {
   imgCache = {};
   currentImage = 0;
 
-
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
@@ -21,11 +20,24 @@ class DrawableObject {
     arr.forEach((path) => {
       let img = new Image();
       img.src = path;
+      img.style = 'transform: scale(-1)'; //CSS Inlinestyle
       this.imgCache[path] = img;
     });
   }
 
-
-
-
+  // Nur zum Debuggen
+  drawFrame(ctx) {
+    if (this instanceof Character || this instanceof Golem || this instanceof Endboss) {
+      ctx.beginPath();
+      ctx.lineWidth = '3';
+      ctx.strokeStyle = 'blue';
+      ctx.rect(
+        this.x + this.offsetX,
+        this.y + this.offsetY,
+        this.width - this.offsetWidth,
+        this.height - this.offsetHeight
+      );
+      ctx.stroke();
+    }
+  }
 }

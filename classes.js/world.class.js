@@ -3,9 +3,9 @@ class World {
   ground;
   foreground;
   middleDecor;
-
   level = LEVEL1;
-  // gui = new StatusBarBackground();
+  gui = new StatusBarBackground();
+  statusBar = new StatusBar();
   canvas;
   keyboard;
   ctx;
@@ -19,7 +19,7 @@ class World {
     this.foreground = new Foreground(0);
     this.middleDecor = new MiddleDecor(0);
     this.draw();
-    this.generateEnemies(4, Golem);
+    this.generateEnemies(4, Golem, this.character);
     this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.checkCollisions();
@@ -37,9 +37,15 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
-    // this.addObjectsToMap(this.gui);
+
 
     this.ctx.translate(-this.camara_x, 0);
+
+    this.addToMap(this.gui);
+    this.addToMap(this.statusBar);
+
+
+    
 
     let self = this;
     requestAnimationFrame(function () {
@@ -63,7 +69,7 @@ class World {
 
   generateEnemies(count, enemyClass, character = null) {
     for (let i = 0; i < count; i++) {
-      const positionX = Math.random() * 500 + 800;
+      const positionX = Math.random() * 500 + 1800;
       this.level.enemies.push(new enemyClass(positionX, 374, character));
     }
   }

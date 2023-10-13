@@ -31,27 +31,10 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(images, attackFrame) {
-    
     let i = this.currentImage % images.length;
-    let path = attackFrame?images[attackFrame]:images[i];
+    let path = attackFrame ? images[attackFrame] : images[i];
     this.img = this.imgCache[path];
     this.currentImage++;
-  }
-
-  // Nur zum Debuggen
-  drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Golem || this instanceof Endboss) {
-      ctx.beginPath();
-      ctx.lineWidth = '3';
-      ctx.strokeStyle = 'blue';
-      ctx.rect(
-        this.x + this.offsetX,
-        this.y + this.offsetY,
-        this.width - this.offsetWidth,
-        this.height - this.offsetHeight
-      );
-      ctx.stroke();
-    }
   }
 
   moveLeft() {
@@ -95,14 +78,12 @@ class MovableObject extends DrawableObject {
     return this.energy == 0;
   }
 
-
   //Zeitspanne nach einem Hit in der man nicht erneut getroffen werden kann (funktioniert noch nicht)
-  isInvulnarable(){
+  isInvulnarable() {
     if (this.isHurt()) {
       setTimeout(() => {
         this.isColliding(mo);
       }, 1000);
     }
   }
-
 }
