@@ -25,6 +25,9 @@ document.addEventListener('keydown', (event) => {
   if (event.keyCode == 13) {
     globalThis.keyboard.ENTER = true;
   }
+  if (event.keyCode == 69) {
+    globalThis.keyboard.FIRE = true;
+  }
 });
 
 document.addEventListener('keyup', (event) => {
@@ -39,5 +42,8 @@ document.addEventListener('keyup', (event) => {
   }
   if (event.keyCode == 13) {
     globalThis.keyboard.ENTER = false;
+  }
+  if (event.keyCode == 69) {
+    globalThis.keyboard.FIRE = false;
   }
 });

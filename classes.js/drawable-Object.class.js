@@ -27,7 +27,7 @@ class DrawableObject {
 
   // Nur zum Debuggen
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Golem || this instanceof Endboss) {
+    if (this instanceof Character || this instanceof Golem || this instanceof Endboss || this instanceof HealthCoin || this instanceof ManaCoin) {
       ctx.beginPath();
       ctx.lineWidth = '3';
       ctx.strokeStyle = 'blue';

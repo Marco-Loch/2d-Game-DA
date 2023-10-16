@@ -41,8 +41,8 @@ class Golem extends MovableObject {
     'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_011.png'
   ];
   currentImage = 0;
-  minSpeed = 0.1;
-  maxSpeed = 0.4;
+  minSpeed = 0.3;
+  maxSpeed = 0.8;
   otherDirection = true;
 
   constructor(x, y, character, height = 230, width = 210) {

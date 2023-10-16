@@ -59,31 +59,26 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 5;
-    // this.x -= 25;
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
+    if (!this.isHurt()) {
+      this.energy -= 20;
+      // this.x -= 5;
+      if (this.energy < 0) {
+        this.energy = 0;
+      } else {
+        this.lastHit = new Date().getTime();
+      }
     }
   }
-
+  //noch anpassen
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms von hit()
     timepassed = timepassed / 1000; // Differenz in sec
-    return timepassed < 0.3;
+    return timepassed < 1;
   }
 
   isDead() {
     return this.energy == 0;
   }
 
-  //Zeitspanne nach einem Hit in der man nicht erneut getroffen werden kann (funktioniert noch nicht)
-  isInvulnarable() {
-    if (this.isHurt()) {
-      setTimeout(() => {
-        this.isColliding(mo);
-      }, 1000);
-    }
-  }
+  
 }

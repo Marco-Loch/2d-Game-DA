@@ -20,9 +20,9 @@ class World {
     this.middleDecor = new MiddleDecor(0);
     this.draw();
     this.generateEnemies(4, Golem, this.character);
-    this.generateEnemies(1, Endboss, this.character);
+    // this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   draw() {
@@ -33,19 +33,16 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.middleDecor);
     this.addObjectsToMap(this.level.foregrounds);
-
+    this.addObjectsToMap(this.level.healthCoin);
+    this.addObjectsToMap(this.level.manaCoin);
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
-
 
     this.ctx.translate(-this.camara_x, 0);
 
     this.addToMap(this.gui);
     this.addToMap(this.statusBar);
-
-
-    
 
     let self = this;
     requestAnimationFrame(function () {
@@ -55,21 +52,37 @@ class World {
     });
   }
 
-  checkCollisions() {
+  run(){
     setInterval(() => {
+      this.checkCollisions();
+    }, 100);
+  }
+
+  checkCollisions() {
+    
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.hit();
-
-          console.log('Collision with Character', enemy, this.character.energy);
+          this.statusBar.setPercentage(this.character.energy);
+          console.log('Collision with Character', enemy, 'hp: ',this.character.energy);
         }
       });
-    }, 100);
+      this.level.healthCoin.forEach((healthCoin)=>{
+        if (this.character.isColliding(healthCoin)) {
+          if (this.character.energy < 100) {
+            this.character.energy += 20;
+            this.statusBar.setPercentage(this.character.energy);
+          }
+          console.log('Collision with Character', healthCoin, 'hp: ',this.character.energy);
+          // this.healthCoin.splice(this.healthCoin.indexOf(this.healthCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+        }
+      });
+    
   }
 
   generateEnemies(count, enemyClass, character = null) {
     for (let i = 0; i < count; i++) {
-      const positionX = Math.random() * 500 + 1800;
+      const positionX = Math.random() * 3000 + 400;
       this.level.enemies.push(new enemyClass(positionX, 374, character));
     }
   }
@@ -91,7 +104,7 @@ class World {
 
     mo.draw(this.ctx);
 
-    mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
+    // mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

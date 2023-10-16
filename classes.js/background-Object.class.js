@@ -13,11 +13,11 @@ class BackgroundObject extends MovableObject {
   animate() {
     setInterval(() => {
       if (globalThis.keyboard.RIGHT) {
-        this.x += this.speed * 0.8;
+        this.x += this.speed * 0.6;
       }
 
       if (globalThis.keyboard.LEFT) {
-        this.x -= this.speed * 0.8;
+        this.x -= this.speed * 0.6;
       }
     }, 1000 / 60);
   }
