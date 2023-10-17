@@ -64,6 +64,7 @@ class MovableObject extends DrawableObject {
 
       if (this.energy < 0) {
         this.energy = 0;
+        this.charDieing();
       } else {
         this.lastHit = new Date().getTime();
       }
@@ -78,5 +79,6 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     return this.energy == 0;
+    
   }
 }
