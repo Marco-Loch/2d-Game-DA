@@ -6,7 +6,7 @@ class Level {
   backgroundObjects;
   healthCoin;
   manaCoin;
-  level_end_x = 2200;
+  level_end_x = 6000;
 
 
   constructor(enemies, grounds, foregrounds, middleDecor, backgroundObjects, healthCoin, manaCoin) {

@@ -40,15 +40,52 @@ class Golem extends MovableObject {
     'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_010.png',
     'img/3_enemies_golem/golem_normal/3_attack/0_Golem_Slashing_011.png'
   ];
+
+  IMAGES_HURT = [
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_000.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_001.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_002.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_003.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_004.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_005.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_006.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_007.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_008.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_009.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_010.png',
+    'img/3_enemies_golem/golem_normal/4_hurt/0_Golem_Hurt_011.png'
+  ];
+
+  IMAGES_DEAD = [
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_000.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_001.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_002.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_003.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_004.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_005.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_006.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_007.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_008.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_009.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_010.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_011.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_012.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_013.png',
+    'img/3_enemies_golem/golem_normal/2_dead/0_Golem_Dying_014.png'
+  ];
+
   currentImage = 0;
   minSpeed = 0.3;
   maxSpeed = 0.8;
   otherDirection = true;
+  hp = 100;
 
   constructor(x, y, character, height = 230, width = 210) {
     super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALK);
     this.loadImages(this.IMAGES_ATTACK);
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
     this.speed = this.minSpeed + Math.random() * this.maxSpeed;
     this.height = height;
     this.width = width;
@@ -57,15 +94,23 @@ class Golem extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+    const animateFrame = () => {
       if (this.isColliding(this.character) || this.attacking) {
         this.playAnimation(this.IMAGES_ATTACK, this.attackframe);
         this.isAttacking();
+      } else if (this.isColliding(this.character.weapon) && this.hp > 0) {
+        this.playAnimation(this.IMAGES_HURT);
+      } else if (this.isColliding(this.character.weapon) && this.hp === 0) {
+        this.playAnimation(this.IMAGES_DEAD);
       } else {
         this.playAnimation(this.IMAGES_WALK);
         this.moveLeft();
       }
-    }, 1000 / 30);
+
+      requestAnimationFrame(animateFrame);
+    };
+
+    animateFrame();
   }
 
   isAttacking() {
@@ -81,5 +126,13 @@ class Golem extends MovableObject {
       this.attackframe = 0;
     }
     return this.attacking;
+  }
+
+  takeDamage(damage) {
+    this.hp -= damage;
+  }
+
+  isDead() {
+    return this.hp === 0;
   }
 }

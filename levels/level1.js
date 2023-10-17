@@ -24,7 +24,10 @@ const LEVEL1 = new Level(
     new Ground(719 * 11, globalThis.keyboard),
     new Ground(719 * 12, globalThis.keyboard),
     new Ground(719 * 13, globalThis.keyboard),
-    new Ground(719 * 14, globalThis.keyboard)
+    new Ground(719 * 14, globalThis.keyboard),
+    new Ground(719 * 15, globalThis.keyboard),
+    new Ground(719 * 16, globalThis.keyboard),
+    new Ground(719 * 17, globalThis.keyboard)
   ],
   [
     new Foreground(-720 * 9, globalThis.keyboard),
@@ -104,10 +107,7 @@ const LEVEL1 = new Level(
     new BackgroundObject(719 * 13, globalThis.keyboard),
     new BackgroundObject(719 * 14, globalThis.keyboard)
   ],
-  [
-    new HealthCoin(800),
-    new HealthCoin(450)
-  ],
+  [new HealthCoin(800), new HealthCoin(450)],
   [
     new ManaCoin(500),
     new ManaCoin(650),

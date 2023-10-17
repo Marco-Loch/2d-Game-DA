@@ -107,16 +107,15 @@ class Character extends MovableObject {
   ];
   y = 245;
   currentImage = 0;
-  world;
   IDLE;
   speed = 4;
   walking_sound = new Audio('audio/walking.mp3');
   energy = 100;
   mana = 0;
-  
 
   constructor(x, y, height = 250, width = 250) {
     super(x, y).loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+    this.world = world;
     this.height = height;
     this.width = width;
     this.loadImages(this.IMAGES_IDLE);
@@ -126,6 +125,8 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_ATTACK);
+    this.weapon = new Weapon(x, y, 20, 0);
+    this.weapon.active = false;
     this.applyGravity();
     this.animate();
   }
@@ -149,7 +150,6 @@ class Character extends MovableObject {
       this.world.camara_x = -this.x + 100;
     }, 1000 / 60);
 
-
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
@@ -169,6 +169,51 @@ class Character extends MovableObject {
     }, 1000 / 30);
   }
 
+  // animate() {
+  //   const moveCharacter = () => {
+  //     this.walking_sound.pause();
+  //     // Char moving right
+  //     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+  //       this.moveRight();
+  //       // this.walking_sound.play();
+  //     }
+  //     // Char moving left
+  //     if (this.world.keyboard.LEFT && this.x > -100) {
+  //       this.moveLeft();
+  //       // this.walking_sound.play();
+  //     }
+  //     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+  //       this.jump();
+  //     }
+  //     this.world.camara_x = -this.x + 100;
+
+  //     requestAnimationFrame(moveCharacter);
+  //   };
+
+  //   const updateAnimation = () => {
+  //     if (this.isDead()) {
+  //       this.playAnimation(this.IMAGES_DEAD);
+  //     } else if (this.isHurt()) {
+  //       this.playAnimation(this.IMAGES_HURT);
+  //     } else if (this.isAboveGround() && this.speedY > 0) {
+  //       this.playAnimation(this.IMAGES_JUMP);
+  //     } else if (this.isAboveGround() && this.speedY < 0) {
+  //       this.playAnimation(this.IMAGES_FALL);
+  //     } else if (this.isAttacking()) {
+  //       this.playAnimation(this.IMAGES_ATTACK, this.attackframe);
+  //     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+  //       this.playAnimation(this.IMAGES_WALK);
+  //     } else {
+  //       this.playAnimation(this.IMAGES_IDLE);
+  //     }
+
+  //     requestAnimationFrame(updateAnimation);
+  //   };
+
+  //   moveCharacter();
+  //   updateAnimation();
+  // }
+
   // Angriffsanimation bis zum Ende abspielen
   isAttacking() {
     if (this.world.keyboard.ENTER && !this.attacking) {
@@ -183,6 +228,19 @@ class Character extends MovableObject {
       this.attackframe = null;
     }
     return this.attacking;
+  }
 
+  attack() {
+    if (!this.isAttacking) {
+      this.isAttacking = true;
+      this.weapon.active = true; // Aktiviere die Waffe
+      this.world.checkWeaponCollision();
+    }
+  }
+
+  endAttack() {
+    this.isAttacking = false;
+    this.weapon.active = false; // Deaktiviere die Waffe nach dem Angriff
+    // ...
   }
 }

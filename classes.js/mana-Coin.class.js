@@ -13,10 +13,10 @@ class ManaCoin extends MovableObject {
         
     ];
 
-    offsetX = 3;
-    offsetWidth = 5.5;
-    offsetY = 3;
-    offsetHeight = 5.5;
+    offsetX = 0;
+    offsetWidth = 0;
+    offsetY = 0;
+    offsetHeight = 0;
 
     constructor(x, y){
         super(x, y);
