@@ -14,7 +14,7 @@ class ManaBar extends DrawableObject {
     this.loadImages(this.IMAGES);
     this.x = 280;
     this.y = 0;
-    this.width = 160;
+    this.width = 180;
     this.height = 55;
   }
 
