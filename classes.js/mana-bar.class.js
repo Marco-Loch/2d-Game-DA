@@ -13,9 +13,9 @@ class ManaBar extends DrawableObject {
     super().loadImage('img/7_statusbars/1_statusbar/4_statusbar_mana/statusbar_mana_0.png');
     this.loadImages(this.IMAGES);
     this.x = 270;
-    this.y = 0;
-    this.width = 180;
-    this.height = 55;
+    this.y = -9;
+    this.width = 210;
+    this.height = 72;
   }
 
   resolveManaImageIndex(i) {

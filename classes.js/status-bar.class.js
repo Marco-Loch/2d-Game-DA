@@ -15,9 +15,9 @@ class StatusBar extends DrawableObject {
     super();
     this.loadImages(this.IMAGES);
     this.x = 50;
-    this.y = 0;
-    this.width = 180;
-    this.height = 55;
+    this.y = -9;
+    this.width = 210;
+    this.height = 70;
     this.setPercentage(100);
   }
 
