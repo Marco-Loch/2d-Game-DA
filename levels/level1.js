@@ -113,6 +113,7 @@ const LEVEL1 = new Level(
     new ManaCoin(650),
     new ManaCoin(780),
     new ManaCoin(1050),
-    new ManaCoin(1200)
+    new ManaCoin(1200),
+    new ManaCoin(1500)
   ]
 );

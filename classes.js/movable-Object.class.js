@@ -61,7 +61,7 @@ class MovableObject extends DrawableObject {
   hit() {
     if (!this.isHurt()) {
       this.energy -= 20;
-      
+
       if (this.energy < 0) {
         this.energy = 0;
       } else {
@@ -79,6 +79,4 @@ class MovableObject extends DrawableObject {
   isDead() {
     return this.energy == 0;
   }
-
-  
 }

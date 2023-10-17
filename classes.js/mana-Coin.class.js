@@ -23,7 +23,7 @@ class ManaCoin extends MovableObject {
         this.loadImages(this.IMAGES);
         this.height = 40;
         this.width = 40;
-        this.y = 200;
+        this.y = 220;
        
         this.animate();
         this.draw();

@@ -6,6 +6,8 @@ class World {
   level = LEVEL1;
   gui = new StatusBarBackground();
   statusBar = new StatusBar();
+  manaBar = new ManaBar();
+  fsControl = new FullscreenControl();
   canvas;
   keyboard;
   ctx;
@@ -18,11 +20,13 @@ class World {
     this.ground = new Ground(0);
     this.foreground = new Foreground(0);
     this.middleDecor = new MiddleDecor(0);
+
     this.draw();
     this.generateEnemies(4, Golem, this.character);
     // this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.run();
+    console.log('Current Mana: ', this.character.mana);
   }
 
   draw() {
@@ -43,6 +47,8 @@ class World {
 
     this.addToMap(this.gui);
     this.addToMap(this.statusBar);
+    this.addToMap(this.fsControl);
+    this.addToMap(this.manaBar);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -73,17 +79,17 @@ class World {
           this.statusBar.setPercentage(this.character.energy);
         }
         console.log('Collision with Character', healthCoin, 'hp: ', this.character.energy);
-        this.level.healthCoin.splice(this.level.healthCoin.indexOf(this.level.healthCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+        this.level.healthCoin.splice(this.level.healthCoin.indexOf(this.level.healthCoin), 1); //Das getriggerte Objekt muss aus dem Array gelöscht werden
       }
     });
     this.level.manaCoin.forEach((manaCoin) => {
       if (this.character.isColliding(manaCoin)) {
-        if (this.character.mana < 100) {
-          this.character.mana += 20;
-          this.statusBar.setPercentage(this.character.mana);
+        if (this.character.mana < 6) {
+          this.character.mana += 1;
+          this.manaBar.resolveManaImageIndex(this.character.mana);
         }
         console.log('Collision with Character', manaCoin, 'mana: ', this.character.mana);
-        this.level.manaCoin.splice(this.level.manaCoin.indexOf(this.level.manaCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+        this.level.manaCoin.splice(this.level.manaCoin.indexOf(this.level.manaCoin), 1); //Das getriggerte Objekt muss aus dem Array gelöscht werden
       }
     });
   }

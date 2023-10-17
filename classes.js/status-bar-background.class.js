@@ -2,7 +2,7 @@ class StatusBarBackground extends DrawableObject {
   
   y = 0;
   x = 0;
-  height = 54;
+  height = 58;
   width = 720;
 
   constructor() {
