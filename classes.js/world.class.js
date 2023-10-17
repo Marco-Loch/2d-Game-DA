@@ -52,32 +52,40 @@ class World {
     });
   }
 
-  run(){
+  run() {
     setInterval(() => {
       this.checkCollisions();
     }, 100);
   }
 
   checkCollisions() {
-    
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+        console.log('Collision with Character', enemy, 'hp: ', this.character.energy);
+      }
+    });
+    this.level.healthCoin.forEach((healthCoin) => {
+      if (this.character.isColliding(healthCoin)) {
+        if (this.character.energy < 100) {
+          this.character.energy += 20;
           this.statusBar.setPercentage(this.character.energy);
-          console.log('Collision with Character', enemy, 'hp: ',this.character.energy);
         }
-      });
-      this.level.healthCoin.forEach((healthCoin)=>{
-        if (this.character.isColliding(healthCoin)) {
-          if (this.character.energy < 100) {
-            this.character.energy += 20;
-            this.statusBar.setPercentage(this.character.energy);
-          }
-          console.log('Collision with Character', healthCoin, 'hp: ',this.character.energy);
-          // this.healthCoin.splice(this.healthCoin.indexOf(this.healthCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+        console.log('Collision with Character', healthCoin, 'hp: ', this.character.energy);
+        this.level.healthCoin.splice(this.level.healthCoin.indexOf(this.level.healthCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+      }
+    });
+    this.level.manaCoin.forEach((manaCoin) => {
+      if (this.character.isColliding(manaCoin)) {
+        if (this.character.mana < 100) {
+          this.character.mana += 20;
+          this.statusBar.setPercentage(this.character.mana);
         }
-      });
-    
+        console.log('Collision with Character', manaCoin, 'mana: ', this.character.mana);
+        this.level.manaCoin.splice(this.level.manaCoin.indexOf(this.level.manaCoin), 1); //Das Objekt muss aus dem Array gelöscht werden
+      }
+    });
   }
 
   generateEnemies(count, enemyClass, character = null) {

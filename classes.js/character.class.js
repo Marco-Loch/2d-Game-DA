@@ -112,6 +112,7 @@ class Character extends MovableObject {
   speed = 4;
   walking_sound = new Audio('audio/walking.mp3');
   energy = 100;
+  mana = 0;
   
 
   constructor(x, y, height = 250, width = 250) {

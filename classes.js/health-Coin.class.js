@@ -30,7 +30,7 @@ class HealthCoin extends MovableObject {
     animate(){
         setInterval(() => {
             this.playAnimation(this.IMAGES);
-        }, 1000/10);
+        }, 1000/12);
     }
 
     draw(ctx) {
