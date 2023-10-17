@@ -61,7 +61,7 @@ class World {
       this.checkEnemyCollisions();
       this.checkHealthCoinCollision();
       this.checkManaCoinCollision();
-      // this.checkWeaponCollision();
+      this.checkWeaponCollision();
     }, 100);
   }
 
@@ -127,7 +127,7 @@ class World {
           this.manaBar.resolveManaImageIndex(this.character.mana);
         }
         console.log('Collision with Character', manaCoin, 'mana: ', this.character.mana);
-        this.level.manaCoin.splice(index, 1); // Das getriggerte Objekt muss aus dem Array gelöscht werden
+        this.level.manaCoin.splice(index, 1);
       }
     });
   }
@@ -137,7 +137,7 @@ class World {
       this.level.enemies.forEach((enemy, index) => {
         if (this.character.weapon.isColliding(enemy)) {
           enemy.takeDamage(this.character.weapon.damage);
-          // Überprüfe, ob der Feind tot ist und entferne ihn aus der Liste
+          // Überprüft, ob der Feind tot ist und entfernt ihn aus der Liste
           if (enemy.isDead()) {
             this.level.enemies.splice(index, 1);
           }
