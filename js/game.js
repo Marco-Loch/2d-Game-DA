@@ -49,13 +49,11 @@ document.addEventListener('keyup', (event) => {
 });
 
 function toggleFullscreen() {
-  let elem = document.querySelector("canvas");
+  let elem = document.querySelector('canvas');
 
   if (!document.fullscreenElement) {
     elem.requestFullscreen().catch((err) => {
-      alert(
-        `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`,
-      );
+      alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
     });
   } else {
     document.exitFullscreen();

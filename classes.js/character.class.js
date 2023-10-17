@@ -162,7 +162,7 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_FALL);
       } else if (this.isAlive && this.isAttacking()) {
         this.playAnimation(this.IMAGES_ATTACK, this.attackframe);
-      } else if (this.isAlive && this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      } else if ((this.isAlive && this.world.keyboard.RIGHT) || this.world.keyboard.LEFT) {
         this.playAnimation(this.IMAGES_WALK);
       } else {
         this.playAnimation(this.isAlive && this.IMAGES_IDLE);
@@ -245,7 +245,7 @@ class Character extends MovableObject {
     // ...
   }
 
-  charDieing(){
+  charDieing() {
     this.isAlive = false;
   }
 }
