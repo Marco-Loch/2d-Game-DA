@@ -92,6 +92,12 @@ class World {
     });
   }
 
+  /**
+   *
+   * @param {Anzahl} count
+   * @param {Gegnertyp} enemyClass
+   * @param {Character} character
+   */
   generateEnemies(count, enemyClass, character = null) {
     for (let i = 0; i < count; i++) {
       const positionX = Math.random() * 3000 + 400;
@@ -103,6 +109,10 @@ class World {
     this.character.world = this;
   }
 
+  /**
+   *
+   * @param {Objecte aus Arrays} objects
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
