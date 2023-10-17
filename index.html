@@ -24,18 +24,20 @@
     <script src="classes.js/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <title>2d-Game-DA</title>
   </head>
 
   <body>
     <h1>2D Sidescroller</h1>
-    <!-- Canvas-->
-    <canvas id="canvas" width="720" height="480"> 
-    </canvas>
-    <!-- <div id="controls">
-      <button id="fullscreen-control" onclick="requestFullscreen()"></button>
-    </div> -->
-    
+    <div id="game-div">
+      <!-- Canvas-->
+      <canvas id="canvas" width="720" height="480"> </canvas>
+      <div id="on-screen-buttons">
+        <div id="controls">
+          <button id="fullscreen-control" onclick="toggleFullscreen()"></button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -15,6 +15,11 @@ canvas {
     background-color: black;
 }
 
+.on-screen-buttons {
+    height: 480;
+    width: 720;
+}
+
 #fullscreen-control {
     height: 38px;
     width: 38px;
