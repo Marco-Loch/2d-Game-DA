@@ -15,13 +15,33 @@ canvas {
     background-color: black;
 }
 
+.game-div {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
 .on-screen-buttons {
-    height: 480;
-    width: 720;
+    display: flex;
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    align-items: end;
+    bottom: 0px;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #fullscreen-control {
     height: 38px;
     width: 38px;
-    background-color: black;
+    background-image: url('img/1_buttons/fullscreen.png');
+    cursor: pointer;
 }

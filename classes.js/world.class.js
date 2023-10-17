@@ -31,9 +31,8 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+    //Movable Objects
     this.ctx.translate(this.camara_x, 0);
-
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.middleDecor);
     this.addObjectsToMap(this.level.foregrounds);
@@ -42,9 +41,8 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
-
     this.ctx.translate(-this.camara_x, 0);
-
+    //Static Objects
     this.addToMap(this.gui);
     this.addToMap(this.statusBar);
     this.addToMap(this.fsControl);
