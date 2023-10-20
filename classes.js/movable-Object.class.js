@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   attacking = false;
   attackframe = null;
+  dieframe = 0;
 
   constructor(x, y) {
     super();
@@ -62,19 +63,22 @@ class MovableObject extends DrawableObject {
     if (!this.isHurt()) {
       this.energy -= 20;
 
-      if (this.energy < 0) {
+      if (this.energy <= 0) {
         this.energy = 0;
-        this.charDieing();
+        // Statt charDieing() hier aufrufen:
+        if (this instanceof Character) {
+          this.charDieing();
+        }
       } else {
         this.lastHit = new Date().getTime();
       }
     }
   }
-  //noch anpassen
+
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; // Differenz in ms von hit()
-    timepassed = timepassed / 1000; // Differenz in sec
-    return timepassed < 0.8;
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 0.2;
   }
 
   isDead() {

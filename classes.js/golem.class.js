@@ -79,6 +79,7 @@ class Golem extends MovableObject {
   maxSpeed = 0.8;
   otherDirection = true;
   hp = 100;
+  isAlive = true;
 
   constructor(x, y, character, height = 230, width = 210) {
     super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
@@ -101,10 +102,16 @@ class Golem extends MovableObject {
       } else if (this.isColliding(this.character.weapon) && this.hp > 0) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isColliding(this.character.weapon) && this.hp === 0) {
-        this.playAnimation(this.IMAGES_DEAD);
+        
+        this.golemDieing();
+        this.stopAnimation(); // Rufen Sie die Stop-Methode auf, wenn der Golem stirbt
       } else {
         this.playAnimation(this.IMAGES_WALK);
         this.moveLeft();
+      }
+
+      if (!this.isAlive) {
+        this.stopAnimation(); // Rufen Sie die Stop-Methode auf, wenn der Golem tot ist
       }
 
       requestAnimationFrame(animateFrame);
@@ -134,5 +141,21 @@ class Golem extends MovableObject {
 
   isDead() {
     return this.hp === 0;
+  }
+
+  stopAnimation() {
+    cancelAnimationFrame(this.animationFrame);
+  }
+
+  golemDieing() {
+    if (this.isAlive) {
+      this.isAlive = false;
+      this.playAnimation(this.IMAGES_DEAD); // Starte die Sterbeanimation
+
+      // setTimeout zum Beenden der Sterbeanimation nach der festgelegten Anzahl von Frames
+      setTimeout(() => {
+        this.stopAnimation();
+      }, this.IMAGES_DEAD.length * 1000 / 60);
+    }
   }
 }

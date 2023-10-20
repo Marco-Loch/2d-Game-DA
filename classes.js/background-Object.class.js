@@ -3,6 +3,7 @@ class BackgroundObject extends MovableObject {
   height = 480;
   width = 720;
   speed = 4;
+  animateInterval;
 
   constructor(x) {
     super(x).loadImage('img/5_background/layers/4_fourth_layer/BG_Decor.png');
@@ -11,7 +12,7 @@ class BackgroundObject extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.animateInterval = setInterval(() => {
       if (globalThis.keyboard.RIGHT) {
         this.x += this.speed * 0.6;
       }
@@ -20,5 +21,9 @@ class BackgroundObject extends MovableObject {
         this.x -= this.speed * 0.6;
       }
     }, 1000 / 60);
+  }
+
+  stopAnimation() {
+    clearInterval(this.animateInterval);
   }
 }

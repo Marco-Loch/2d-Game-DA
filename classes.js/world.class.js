@@ -17,9 +17,6 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.ground = new Ground(0);
-    this.foreground = new Foreground(0);
-    this.middleDecor = new MiddleDecor(0);
 
     this.draw();
     this.generateEnemies(4, Golem, this.character);
@@ -198,5 +195,21 @@ class World {
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
+  }
+
+  characterDied(){
+    
+    // Iteriere durch die Hintergrundobjekte und stoppe ihre Animation
+    this.level.backgroundObjects.forEach((bgObject) => {
+      bgObject.stopAnimation();
+    });
+    // Iteriere durch die MiddleDecorobjekte und stoppe ihre Animation
+    this.level.middleDecor.forEach((mdObject) => {
+      mdObject.stopAnimation();
+    });
+    // Iteriere durch die Vordergrundobjekte und stoppe ihre Animation
+    this.level.grounds.forEach((fgObject) => {
+      fgObject.stopAnimation();
+    });
   }
 }
