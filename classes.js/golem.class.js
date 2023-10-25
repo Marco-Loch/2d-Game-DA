@@ -80,6 +80,7 @@ class Golem extends MovableObject {
   otherDirection = true;
   hp = 100;
   isAlive = true;
+  requestAnimationFrameStep;
 
   constructor(x, y, character, height = 230, width = 210) {
     super(x, y).loadImage('img/3_enemies_golem/golem_normal/1_walk/1_w.png');
@@ -114,9 +115,9 @@ class Golem extends MovableObject {
         this.stopAnimation(); // Rufen Sie die Stop-Methode auf, wenn der Golem tot ist
       }
 
-      requestAnimationFrame(animateFrame);
+      this.requestAnimationFrameStep = requestAnimationFrame(animateFrame);
     };
-
+     
     animateFrame();
   }
 
@@ -144,7 +145,7 @@ class Golem extends MovableObject {
   }
 
   stopAnimation() {
-    cancelAnimationFrame(this.animationFrame);
+    cancelAnimationFrame(this.requestAnimationFrameStep);
   }
 
   golemDieing() {

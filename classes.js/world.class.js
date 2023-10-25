@@ -19,7 +19,7 @@ class World {
     this.keyboard = keyboard;
 
     this.draw();
-    this.generateEnemies(4, Golem, this.character);
+    // this.generateEnemies(4, Golem, this.character);
     // this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.run();
@@ -38,6 +38,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
+    
     this.ctx.translate(-this.camara_x, 0);
     //Static Objects
     this.addToMap(this.gui);
@@ -179,6 +180,7 @@ class World {
     mo.draw(this.ctx);
 
     mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
+    
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);
@@ -190,10 +192,17 @@ class World {
     this.ctx.translate(mo.width, 0);
     this.ctx.scale(-1, 1);
     mo.x = mo.x * -1;
+    if (mo instanceof Character) {
+      console.log('mo: ', mo);
+      mo.weaponCollisionBox.x = mo.weaponCollisionBox.x * -1;
+    }
   }
 
   flipImageBack(mo) {
     mo.x = mo.x * -1;
+    if (mo instanceof Character) {
+      mo.weaponCollisionBox.x = mo.weaponCollisionBox.x * -1;
+    }
     this.ctx.restore();
   }
 
@@ -210,6 +219,10 @@ class World {
     // Iteriere durch die Vordergrundobjekte und stoppe ihre Animation
     this.level.grounds.forEach((fgObject) => {
       fgObject.stopAnimation();
+    });
+    // Iteriere durch die Gegner und stoppe ihre Animation
+    this.level.enemies.forEach((enemys) => {
+      enemys.stopAnimation();
     });
   }
 }

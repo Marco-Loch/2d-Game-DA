@@ -128,7 +128,13 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_ATTACK);
-    this.weapon = new Weapon(x, y, 20, 0);
+    this.weapon = new Weapon(x, y, 20, 10);
+    this.weaponCollisionBox = {
+      x,
+      y,
+      width: 20,
+      height: 10
+    };
     this.weapon.active = false;
     this.applyGravity();
     this.animate();
@@ -143,6 +149,11 @@ class Character extends MovableObject {
   animate() {
     this.animateInterval = setInterval(() => {
       this.walking_sound.pause();
+      {
+        this.weaponCollisionBox.x = this.x;
+        this.weaponCollisionBox.y = this.y;
+        
+      }
 
       if (this.isAlive && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
@@ -173,9 +184,9 @@ class Character extends MovableObject {
       } else {
         this.playAnimation(this.IMAGES_DEAD, this.dieframe);
         this.dieframe++;
-        console.log('Dieframe: ', this.dieframe, 'IMAGES_DEAD-length -1 : ', this.IMAGES_DEAD.length -1);
+        // console.log('Dieframe: ', this.dieframe, 'IMAGES_DEAD-length -1 : ', this.IMAGES_DEAD.length -1);
         if (this.dieframe >= this.IMAGES_DEAD.length - 1) {
-          console.log('Stop Animation');
+          // console.log('Stop Animation');
           this.stopAnimation();
         }
       }

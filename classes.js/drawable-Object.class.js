@@ -27,13 +27,33 @@ class DrawableObject {
 
   // Nur zum Debuggen
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Golem || this instanceof Endboss || this instanceof HealthCoin || this instanceof ManaCoin) {
+    if (
+      this instanceof Character ||
+      this instanceof Golem ||
+      this instanceof Endboss ||
+      this instanceof HealthCoin ||
+      this instanceof ManaCoin
+    ) {
       ctx.beginPath();
       ctx.lineWidth = '3';
       ctx.strokeStyle = 'blue';
       ctx.rect(
         this.x + this.offsetX,
         this.y + this.offsetY,
+        this.width - this.offsetWidth,
+        this.height - this.offsetHeight
+      );
+      ctx.stroke();
+    }
+    if (this instanceof Character) {
+      console.log('This.weaponCollissionBox: ', this.weaponCollisionBox);
+      console.log('This.CharacterCollissionBox: ', {x: this.x, y: this.y, width: this.width, height: this.height});
+      ctx.beginPath();
+      ctx.lineWidth = '3';
+      ctx.strokeStyle = 'red';
+      ctx.rect(
+        this.weaponCollisionBox.x + 120,
+        this.weaponCollisionBox.y + 50,
         this.width - this.offsetWidth,
         this.height - this.offsetHeight
       );
