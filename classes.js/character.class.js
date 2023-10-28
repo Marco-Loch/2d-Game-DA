@@ -133,18 +133,13 @@ class Character extends MovableObject {
       x,
       y,
       width: 20,
-      height: 10
+      height: 250
     };
     this.weapon.active = false;
     this.applyGravity();
     this.animate();
   }
 
-  // draw(ctx) {
-  //   if (this.img && this.img instanceof Image) {
-  //     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  //   }
-  // }
 
   animate() {
     this.animateInterval = setInterval(() => {
