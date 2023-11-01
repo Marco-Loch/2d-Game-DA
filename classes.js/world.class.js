@@ -19,7 +19,7 @@ class World {
     this.keyboard = keyboard;
 
     this.draw();
-    // this.generateEnemies(4, Golem, this.character);
+    this.generateEnemies(4, Golem, this.character);
     // this.generateEnemies(1, Endboss, this.character);
     this.setWorld();
     this.run();
@@ -38,7 +38,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.grounds);
-    
+
     this.ctx.translate(-this.camara_x, 0);
     //Static Objects
     this.addToMap(this.gui);
@@ -68,7 +68,7 @@ class World {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
-        console.log('Collision with Character', enemy, 'hp: ', this.character.energy);
+        // console.log('Collision with Character', enemy, 'hp: ', this.character.energy);
       }
     });
   }
@@ -96,7 +96,7 @@ class World {
           this.character.energy += 20;
           this.statusBar.setPercentage(this.character.energy);
         }
-        console.log('Collision with Character', healthCoin, 'hp: ', this.character.energy);
+        // console.log('Collision with Character', healthCoin, 'hp: ', this.character.energy);
         this.level.healthCoin.splice(index, 1);
       }
     });
@@ -124,16 +124,17 @@ class World {
           this.character.mana += 1;
           this.manaBar.resolveManaImageIndex(this.character.mana);
         }
-        console.log('Collision with Character', manaCoin, 'mana: ', this.character.mana);
+        // console.log('Collision with Character', manaCoin, 'mana: ', this.character.mana);
         this.level.manaCoin.splice(index, 1);
       }
     });
   }
 
   checkWeaponCollision() {
-    if (this.character.weapon && this.character.weapon.active) {
+    if (this.character.weapon && this.character.attacking) {
       this.level.enemies.forEach((enemy, index) => {
-        if (this.character.weapon.isColliding(enemy)) {
+        if (this.character.isWeaponColliding(enemy)) {
+          console.log('Hit Enemy');
           enemy.takeDamage(this.character.weapon.damage);
           // Überprüft, ob der Feind tot ist und entfernt ihn aus der Liste
           if (enemy.isDead()) {
@@ -180,7 +181,6 @@ class World {
     mo.draw(this.ctx);
 
     mo.drawFrame(this.ctx); // CollisionFrame zum Debuggen
-    
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);
@@ -193,7 +193,7 @@ class World {
     this.ctx.scale(-1, 1);
     mo.x = mo.x * -1;
     if (mo instanceof Character) {
-      console.log('mo: ', mo);
+      // console.log('mo: ', mo);
       mo.weaponCollisionBox.x = mo.weaponCollisionBox.x * -1;
     }
   }
@@ -206,8 +206,7 @@ class World {
     this.ctx.restore();
   }
 
-  characterDied(){
-    
+  characterDied() {
     // Iteriere durch die Hintergrundobjekte und stoppe ihre Animation
     this.level.backgroundObjects.forEach((bgObject) => {
       bgObject.stopAnimation();

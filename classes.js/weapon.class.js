@@ -15,6 +15,14 @@ class Weapon {
   //   ctx.strokeStyle = 'red';
   //   ctx.rect(this.x, this.y, this.width, this.height);
   //   ctx.stroke();
-   
+
   // }
+  isWeaponColliding(mo) {
+    return (
+      this.x + this.width >= mo.x &&
+      this.x <= mo.x + mo.width &&
+      this.y + this.height >= mo.y &&
+      this.y <= mo.y + mo.height
+    );
+  }
 }

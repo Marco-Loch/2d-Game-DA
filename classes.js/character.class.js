@@ -133,21 +133,23 @@ class Character extends MovableObject {
       x,
       y,
       width: 20,
-      height: 250
+      height: 10
     };
     this.weapon.active = false;
     this.applyGravity();
     this.animate();
   }
 
-
   animate() {
     this.animateInterval = setInterval(() => {
       this.walking_sound.pause();
       {
-        this.weaponCollisionBox.x = this.x;
-        this.weaponCollisionBox.y = this.y;
-        
+        if (this.weaponCollisionBox.x >= 0) {
+          this.weaponCollisionBox.x = this.x + 150;
+        } else {
+          this.weaponCollisionBox.x = this.x - 150;
+        }
+        this.weaponCollisionBox.y = this.y + 100;
       }
 
       if (this.isAlive && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -195,6 +197,7 @@ class Character extends MovableObject {
       this.attackframe = 0;
     }
 
+    this.world.checkWeaponCollision();
     this.attackframe++;
 
     if (this.attackframe >= this.IMAGES_ATTACK.length) {
@@ -204,18 +207,18 @@ class Character extends MovableObject {
     return this.attacking;
   }
 
-  attack() {
-    if (!this.isAttacking) {
-      this.charIsAttacking = true;
-      this.attackframe = 0;
-      this.weapon.active = true; // Aktiviere die Waffe
-      this.world.checkWeaponCollision();
-    }
-  }
+  // attack() {
+  //   console.log('Bevore');
+  //   if (!this.isAttacking()) {
+  //     console.log('In Attack');
+  //     this.charIsAttacking = true;
+  //     this.attackframe = 0;
+
+  //   }
+  // }
 
   endAttack() {
     this.charIsAttacking = false;
-    this.weapon.active = false; // Deaktiviere die Waffe nach dem Angriff
   }
 
   charDieing() {
@@ -227,5 +230,14 @@ class Character extends MovableObject {
 
   stopAnimation() {
     clearInterval(this.animateInterval);
+  }
+
+  isWeaponColliding(mo) {
+    return (
+      this.weaponCollisionBox.x < mo.x + mo.width &&
+      this.weaponCollisionBox.x + this.weaponCollisionBox.width > mo.x &&
+      this.weaponCollisionBox.y < mo.y + mo.height &&
+      this.weaponCollisionBox.y + this.weaponCollisionBox.height > mo.y
+    );
   }
 }

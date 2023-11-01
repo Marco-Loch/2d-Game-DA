@@ -46,16 +46,16 @@ class DrawableObject {
       ctx.stroke();
     }
     if (this instanceof Character) {
-      console.log('This.weaponCollissionBox: ', this.weaponCollisionBox);
-      console.log('This.CharacterCollissionBox: ', {x: this.x, y: this.y, width: this.width, height: this.height});
+      // console.log('This.weaponCollissionBox: ', this.weaponCollisionBox);
+      // console.log('This.CharacterCollissionBox: ', {x: this.x, y: this.y, width: this.width, height: this.height});
       ctx.beginPath();
       ctx.lineWidth = '3';
       ctx.strokeStyle = 'red';
       ctx.rect(
-        this.weaponCollisionBox.x + 120,
-        this.weaponCollisionBox.y + 50,
-        this.width - this.offsetWidth,
-        this.height - this.offsetHeight
+        this.weaponCollisionBox.x,
+        this.weaponCollisionBox.y,
+        this.weaponCollisionBox.width,
+        this.weaponCollisionBox.height
       );
       ctx.stroke();
     }
