@@ -24,7 +24,6 @@ class Enemy {
     }
     if (this.x + this.width < 0) {
       this.markedForDeletion = true;
-      this.game.score--;
     }
   }
 

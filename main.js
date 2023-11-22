@@ -134,7 +134,7 @@ window.addEventListener("load", () => {
 
   /**
    * Get the value of "highscore" in local storage
-   * @returns
+   * @returns Value of highscore in localStorage
    */
   function getHighscore() {
     return localStorage.getItem("highscore") || 0;
