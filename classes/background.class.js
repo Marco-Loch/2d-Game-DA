@@ -1,3 +1,6 @@
+/**
+ * Creates a layer for the background
+ */
 class Layer {
   constructor(game, width, height, image, speedModifier) {
     this.game = game;

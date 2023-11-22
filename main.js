@@ -17,6 +17,9 @@ window.addEventListener("load", () => {
   canvas.height = 480;
   const fullScreenButton = document.getElementById("fullScreenButton");
 
+  /**
+   * Creates an instance of the game 
+   */
   class Game {
     constructor(width, height) {
       this.width = width;
@@ -46,6 +49,10 @@ window.addEventListener("load", () => {
       this.player.currentState.enter();
     }
 
+    /**
+     * Updates the game class and all its object handlers
+     * @param {Num} deltaTime 
+     */
     update(deltaTime) {
       this.time += deltaTime;
       if (this.time > this.maxTime) this.gameOver = true;
@@ -57,6 +64,9 @@ window.addEventListener("load", () => {
       this.handleCollisions(deltaTime);
     }
 
+    /**
+     * Method to handle various particles 
+     */
     handleParticles() {
       this.particles.forEach((particle, index) => {
         particle.update();
@@ -67,6 +77,10 @@ window.addEventListener("load", () => {
       }
     }
 
+    /**
+     * Method to handle all enemies in the game
+     * @param {Num} deltaTime 
+     */
     handleEnemies(deltaTime) {
       if (this.enemyTimer > this.enemyInterval) {
         this.addEnemy();
@@ -82,6 +96,10 @@ window.addEventListener("load", () => {
       });
     }
 
+    /**
+     * Method to check if any collision is detected
+     * @param {Num} deltaTime 
+     */
     handleCollisions(deltaTime) {
       this.collisions.forEach((collision, index) => {
         collision.update(deltaTime);
@@ -89,6 +107,10 @@ window.addEventListener("load", () => {
       });
     }
 
+    /**
+     * Main draw method to display all visuals on the canvas
+     * @param {ctx} context 
+     */
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
@@ -105,6 +127,9 @@ window.addEventListener("load", () => {
       this.UI.draw(context);
     }
 
+    /**
+     * Adds enemies with math functions
+     */
     addEnemy() {
       if (this.speed > 0 && Math.random() < 0.5)
         this.enemies.push(new GroundEnemy(this));
@@ -177,13 +202,16 @@ window.addEventListener("load", () => {
   ///////////////////////////////////////////////////////////////
 
   /**
-   * Adjusting Canvas in Fullscreen Mode
+   * Scaling Canvas in fullscreen mode upwards
    */
   function scaleCanvasUp() {
     const scaleFactor = window.innerWidth / 760;
     canvas.style.transform = `translate(-50%, -50%) scale(${scaleFactor}) `;
   }
 
+  /**
+   * Scaling Canvas in fullscreen mode downwards
+   */
   function scaleCanvasDown() {
     canvas.style.transform = "translate(-50%, -50%) scale(1)";
   }

@@ -1,3 +1,6 @@
+/**
+ * Creates an input handler with several event listeners
+ */
 export class InputHandler {
   constructor(game) {
     this.game = game;
@@ -43,45 +46,55 @@ export class InputHandler {
     const rollButton = document.getElementById("mobileControlsRoll");
 
     /**
-     * Adding touch event listeners for various mobile buttons 
+     * Adding touch event listeners for various mobile buttons
      */
-    rightButton.addEventListener("touchstart", () => {
+    rightButton.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.handleButtonAction("right", "press");
     });
 
-    rightButton.addEventListener("touchend", () => {
+    rightButton.addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.handleButtonAction("right", "release");
     });
 
-    leftButton.addEventListener("touchstart", () => {
+    leftButton.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.handleButtonAction("left", "press");
     });
 
-    leftButton.addEventListener("touchend", () => {
+    leftButton.addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.handleButtonAction("left", "release");
     });
 
-    upButton.addEventListener("touchstart", () => {
+    upButton.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.handleButtonAction("up", "press");
     });
 
-    upButton.addEventListener("touchend", () => {
+    upButton.addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.handleButtonAction("up", "release");
     });
 
-    downButton.addEventListener("touchstart", () => {
+    downButton.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.handleButtonAction("down", "press");
     });
 
-    downButton.addEventListener("touchend", () => {
+    downButton.addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.handleButtonAction("down", "release");
     });
 
-    rollButton.addEventListener("touchstart", () => {
+    rollButton.addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.handleButtonAction("roll", "press");
     });
 
-    rollButton.addEventListener("touchend", () => {
+    rollButton.addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.handleButtonAction("roll", "release");
     });
   }
