@@ -78,7 +78,30 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
+
+.flexbox-item {
+    flex: 0 1 auto;
+}
+
+.flex-item:nth-child(1) {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+.flex-item:nth-child(2) {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
 
 #canvas1 {
     position: absolute;
@@ -89,18 +112,62 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    display: block;
+    z-index: -1;
+}
+
+#mobileControls {
+    display: none;   
+    height: 25%;
+    width: 100%;
+    z-index: 999;
+    position: relative;
+    bottom: -45%;
+    opacity: 0.5;
+}
+
+#mobileControlsLeftScreen {
+    width: 60%;
+    padding-left: 5%;
+}
+
+#mobileControlsRightScreen {
+    width: 40%;
+    padding-left: 5%;
+
+}
+
+.mobileControlsButton {
+   background-color: rgba(0,0,0,0);
+   border: 0;
+}
+
+.mobileControlsButton:active {
+    opacity: 0.2;
 }
 
 #images {
     display: none;
 }
 
-@media screen and (max-height: 400px) {
+@media only screen and (max-height: 480px) {
+    #visDiv {
+        height: 100vh;
+    }
     #restart_link {
         top: 70%;
+    }
+    #mobileControls {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    #visDiv {
+        width: 100%;
+    }
+    #mobileControls {
+        width: 75%;
+        display: flex;
     }
 }

@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
   canvas.height = 480;
   const fullScreenButton = document.getElementById("fullScreenButton");
 
+
   class Game {
     constructor(width, height) {
       this.width = width;
@@ -114,6 +115,8 @@ window.addEventListener("load", () => {
       else if (this.speed > 0) this.enemies.push(new SpiderEnemy(this));
       this.enemies.push(new FlyingEnemy(this));
     }
+
+    
   }
 
   ///////////////////////////////////////////////////////////////
