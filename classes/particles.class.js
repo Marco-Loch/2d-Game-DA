@@ -1,3 +1,6 @@
+/**
+ * Creates a particle class
+ */
 class Particle {
   constructor(game) {
     this.game = game;

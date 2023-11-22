@@ -1,3 +1,6 @@
+/**
+ * Creates an enemy class
+ */
 class Enemy {
   constructor() {
     this.frameX = 0;

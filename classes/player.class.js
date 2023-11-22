@@ -9,6 +9,9 @@ import {
 } from "./playerStates.class.js";
 import { CollisionAnimation } from "./collision-Animation.class.js";
 
+/**
+ * Creates a player class
+ */
 export class Player {
   constructor(game) {
     this.game = game;

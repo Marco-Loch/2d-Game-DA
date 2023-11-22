@@ -1,3 +1,6 @@
+/**
+ * Creates a UI class
+ */
 export class UI {
   constructor(game) {
     this.game = game;
