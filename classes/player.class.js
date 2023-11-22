@@ -38,6 +38,11 @@ export class Player {
     ];
   }
 
+  /**
+   * Updates the player position and sprite animation
+   * @param {String} input 
+   * @param {Num} deltaTime 
+   */
   update(input, deltaTime) {
     this.checkCollision();
     this.currentState.handleInput(input);
@@ -46,6 +51,10 @@ export class Player {
     this.spriteAnimation(deltaTime);
   }
 
+  /**
+   * Updates the horizontal position of the player
+   * @param {String} input 
+   */
   horizontalMovement(input) {
     if (input.includes("d") && this.currentState !== this.states[6])
       this.speed = this.maxSpeed;
@@ -58,6 +67,9 @@ export class Player {
     this.x += this.speed;
   }
 
+  /**
+   * Updates the vertical position of the player
+   */
   verticalMovement() {
     this.y += this.vy;
     if (!this.onGround()) this.vy += this.weight;
@@ -66,6 +78,10 @@ export class Player {
       this.y = this.game.height - this.height - this.game.groundMargin;
   }
 
+  /**
+   * Updates the spriteAnimation for the player
+   * @param {Num} deltaTime 
+   */
   spriteAnimation(deltaTime) {
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;
@@ -76,6 +92,10 @@ export class Player {
     }
   }
 
+  /**
+   * Draws the player and a debug rectangle if game is set to debug
+   * @param {ctx} context 
+   */
   draw(context) {
     context.strokeStyle = "white";
     if (this.game.debug)
@@ -93,16 +113,28 @@ export class Player {
     );
   }
 
+  /**
+   * Checks if player is on the ground
+   * @returns true or false
+   */
   onGround() {
     return this.y >= this.game.height - this.height - this.game.groundMargin;
   }
 
+  /**
+   * Sets the states of the player corresponding to active player states and adjusts game speed
+   * @param {Obj} state 
+   * @param {Num} speed 
+   */
   setState(state, speed) {
     this.currentState = this.states[state];
     this.game.speed = this.game.maxSpeed * speed;
     this.currentState.enter();
   }
 
+  /**
+   * Check if player is colliding with any enemy 
+   */
   checkCollision() {
     this.game.enemies.forEach((enemy, i) => {
       if (
@@ -125,6 +157,10 @@ export class Player {
     });
   }
 
+  /**
+   * Markes enemies for deletion if colliding with the player and pushes a new collision animation into collisions array
+   * @param {Obj} enemy 
+   */
   isColliding(enemy) {
     enemy.markedForDeletion = true;
     this.game.collisions.push(

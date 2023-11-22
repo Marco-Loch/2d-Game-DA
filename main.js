@@ -17,7 +17,6 @@ window.addEventListener("load", () => {
   canvas.height = 480;
   const fullScreenButton = document.getElementById("fullScreenButton");
 
-
   class Game {
     constructor(width, height) {
       this.width = width;
@@ -45,9 +44,6 @@ window.addEventListener("load", () => {
       this.gameOver = false;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
-      this.splashsound = new Audio();
-      this.splashsound.src = "./assets/audio/Ice attack 2.wav";
-      this.splashsound.volume = 0.2;
     }
 
     update(deltaTime) {
@@ -115,8 +111,6 @@ window.addEventListener("load", () => {
       else if (this.speed > 0) this.enemies.push(new SpiderEnemy(this));
       this.enemies.push(new FlyingEnemy(this));
     }
-
-    
   }
 
   ///////////////////////////////////////////////////////////////
@@ -124,6 +118,10 @@ window.addEventListener("load", () => {
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
 
+  /**
+   * Animate all Spritesheets with deltaTime
+   * @param {*} timeStamp
+   */
   function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
@@ -134,6 +132,10 @@ window.addEventListener("load", () => {
   }
   animate(0);
 
+  /**
+   * Get the value of "highscore" in local storage
+   * @returns
+   */
   function getHighscore() {
     return localStorage.getItem("highscore") || 0;
   }
@@ -142,6 +144,9 @@ window.addEventListener("load", () => {
 
   ///////////////////////////////////////////////////////////////
 
+  /**
+   * Toggle Fullscreen Mode
+   */
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
       visDiv.requestFullscreen().catch((err) => {
@@ -164,8 +169,16 @@ window.addEventListener("load", () => {
     false
   );
 
+  fullScreenButton.addEventListener("click", () => {
+    toggleFullScreen();
+    lockLandscapeOrientation();
+  });
+
   ///////////////////////////////////////////////////////////////
 
+  /**
+   * Adjusting Canvas in Fullscreen Mode
+   */
   function scaleCanvasUp() {
     const scaleFactor = window.innerWidth / 760;
     canvas.style.transform = `translate(-50%, -50%) scale(${scaleFactor}) `;
@@ -177,39 +190,47 @@ window.addEventListener("load", () => {
 
   ///////////////////////////////////////////////////////////////
 
+  /**
+   * Mobile Browser check
+   * @returns true oder false
+   */
   function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
   }
 
+  /**
+   * If Mobile browser: lock screen orientation
+   */
   function lockLandscapeOrientation() {
     if (window.screen.orientation && window.screen.orientation.lock) {
       window.screen.orientation
         .lock("landscape-primary")
         .then(() => {
           console.log("Bildschirmausrichtung im Querformat gesperrt.");
-          
         })
         .catch((error) => {
-          console.error("Fehler beim Sperren der Bildschirmausrichtung:", error);
+          console.error(
+            "Fehler beim Sperren der Bildschirmausrichtung:",
+            error
+          );
         });
     }
   }
-  
+
+  /**
+   * Show mobile controls on mobile browsers
+   */
   function showMobileControls() {
     const mobileControls = document.getElementById("mobileControls");
     if (mobileControls) {
       mobileControls.style.display = "flex";
     }
   }
-  
+
   if (isMobileDevice()) {
     lockLandscapeOrientation();
     showMobileControls();
   }
-  
 });
-
-
-

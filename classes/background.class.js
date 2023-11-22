@@ -8,10 +8,19 @@ class Layer {
     this.x = 0;
     this.y = 0;
   }
+
+  /**
+   * Updates the background position
+   */
   update() {
     if (this.x <= -this.width) this.x = 0;
     else this.x -= this.game.speed * this.speedModifier;
   }
+
+  /**
+   * Draws the background onto the canvas
+   * @param {ctx} context
+   */
   draw(context) {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
     context.drawImage(
@@ -31,10 +40,10 @@ export class Background {
     this.game = game;
     this.width = 760;
     this.height = 480;
-    this.layer4Image = document.getElementById('layer4');
-    this.layer3Image = document.getElementById('layer3');
-    this.layer2Image = document.getElementById('layer2');
-    this.layer1Image = document.getElementById('layer1');
+    this.layer4Image = document.getElementById("layer4");
+    this.layer3Image = document.getElementById("layer3");
+    this.layer2Image = document.getElementById("layer2");
+    this.layer1Image = document.getElementById("layer1");
     this.layer1 = new Layer(
       this.game,
       this.width,
@@ -70,11 +79,20 @@ export class Background {
       this.layer4,
     ];
   }
+
+  /**
+   * Updates each layer for the background
+   */
   update() {
     this.backgroundLayers.forEach((layer) => {
       layer.update();
     });
   }
+
+  /**
+   * Draws each layer for the background
+   * @param {ctx} context
+   */
   draw(context) {
     this.backgroundLayers.forEach((layer) => {
       layer.draw(context);
@@ -89,7 +107,7 @@ export class Foreground {
     this.game = game;
     this.width = 760;
     this.height = 480;
-    this.layer5Image = document.getElementById('layer5');
+    this.layer5Image = document.getElementById("layer5");
     this.layer5 = new Layer(
       this.game,
       this.width,
@@ -99,9 +117,17 @@ export class Foreground {
     );
     this.foregroundLayers = this.layer5;
   }
+
+  /**
+   * Uses spezified update method for foreground layer
+   */
   update() {
     this.foregroundLayers.update();
   }
+
+  /**
+   * Uses spezified draw method for foreground layer
+   */
   draw(context) {
     this.foregroundLayers.draw(context);
   }

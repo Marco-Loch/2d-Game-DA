@@ -8,6 +8,10 @@ class Enemy {
     this.markedForDeletion = false;
   }
 
+  /**
+   * Updates the Enemy position and marks them for deletion after they left the screen on the left x axis
+   * @param {Num} deltaTime
+   */
   update(deltaTime) {
     this.x -= this.speedX + this.game.speed;
     this.y += this.speedY;
@@ -24,8 +28,13 @@ class Enemy {
     }
   }
 
+  /**
+   * Draws the Enemys and the debug rectangle
+   * @param {ctx} context
+   */
   draw(context) {
-    if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
+    if (this.game.debug)
+      context.strokeRect(this.x, this.y, this.width, this.height);
     context.drawImage(
       this.image,
       this.frameX * this.width,
@@ -58,6 +67,10 @@ export class FlyingEnemy extends Enemy {
     this.va = Math.random() * 0.1 + 0.1;
   }
 
+  /**
+   * Updates the position for flying Creatures
+   * @param {Num} deltaTime
+   */
   update(deltaTime) {
     super.update(deltaTime);
     this.angle += this.va;
@@ -98,6 +111,10 @@ export class SpiderEnemy extends Enemy {
     this.maxFrame = 5;
   }
 
+  /**
+   * Updates the position for Spiders
+   * @param {Num} deltaTime
+   */
   update(deltaTime) {
     super.update(deltaTime);
     if (this.y > this.game.height - this.height - this.game.groundMargin)
@@ -105,11 +122,15 @@ export class SpiderEnemy extends Enemy {
     if (this.y < -this.height) this.markedForDeletion = true;
   }
 
+  /**
+   * Draws the spiderweb for each spider
+   * @param {ctx} context
+   */
   draw(context) {
     super.draw(context);
     context.beginPath();
     context.strokeStyle = "white";
-    context.moveTo(this.x + this.width * 0.5,0);
+    context.moveTo(this.x + this.width * 0.5, 0);
     context.lineTo(this.x + this.width * 0.5, this.y + 46);
     context.stroke();
   }

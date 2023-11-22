@@ -3,6 +3,9 @@ export class InputHandler {
     this.game = game;
     this.keys = [];
 
+    /**
+     * Adds a keydown event for coresponding keys and adds them to keys Array
+     */
     window.addEventListener("keydown", (e) => {
       if (
         (e.key === "s" ||
@@ -16,6 +19,9 @@ export class InputHandler {
       } else if (e.key === "b") this.game.debug = !this.game.debug;
     });
 
+    /**
+     * Adds a keyup event for coresponding keys and removes them from keys Array
+     */
     window.addEventListener("keyup", (e) => {
       if (
         e.key === "s" ||
@@ -36,6 +42,9 @@ export class InputHandler {
     const downButton = document.getElementById("mobileControlsDown");
     const rollButton = document.getElementById("mobileControlsRoll");
 
+    /**
+     * Adding touch event listeners for various mobile buttons 
+     */
     rightButton.addEventListener("touchstart", () => {
       this.handleButtonAction("right", "press");
     });
@@ -77,20 +86,23 @@ export class InputHandler {
     });
   }
 
+  /**
+   * Mapping input to mobile control buttons
+   * @param {String} buttonType
+   * @param {String} action
+   */
   handleButtonAction(buttonType, action) {
-
-    
     const mapping = {
-      "left": "d",
-      "right": "a",
-      "up": "w",
-      "down": "s",
-      "roll": "Enter"
+      left: "d",
+      right: "a",
+      up: "w",
+      down: "s",
+      roll: "Enter",
     };
-  
+
     if (buttonType in mapping) {
       const key = mapping[buttonType];
-  
+
       if (action === "press" && this.keys.indexOf(key) === -1) {
         this.keys.push(key);
       } else if (action === "release") {

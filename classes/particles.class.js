@@ -4,6 +4,9 @@ class Particle {
     this.markedForDeletion = false;
   }
 
+  /**
+   * General update function for each particle and marks them for deletion, after it has reached a certain minimum size
+   */
   update() {
     this.x -= this.speedX + this.game.speed;
     this.y -= this.speedY;
@@ -12,7 +15,7 @@ class Particle {
   }
 }
 
-///////////////////////////////////////////////////////////////
+////////////////////////////DUST///////////////////////////////
 
 export class Dust extends Particle {
   constructor(game, x, y) {
@@ -25,6 +28,10 @@ export class Dust extends Particle {
     this.color = "rgba(0,0,0,0.6)";
   }
 
+  /**
+   * Draws the dust particles
+   * @param {ctx} context
+   */
   draw(context) {
     context.fillStyle = this.color;
     context.beginPath();
@@ -33,7 +40,7 @@ export class Dust extends Particle {
   }
 }
 
-///////////////////////////////////////////////////////////////
+//////////////////////////////SPLASH////////////////////////////
 
 export class Splash extends Particle {
   constructor(game, x, y) {
@@ -45,21 +52,27 @@ export class Splash extends Particle {
     this.speedY = Math.random() * 2 + 2;
     this.gravity = 0;
     this.image = document.getElementById("fire");
-    
   }
 
-  update(){
+  /**
+   * Specialised update method for splash particles to fall back down to the ground using gravity
+   */
+  update() {
     super.update();
     this.gravity += 0.1;
     this.y += this.gravity;
   }
 
-  draw(context){
+  /**
+   * Simple method to draw splash particles
+   * @param {ctx} context
+   */
+  draw(context) {
     context.drawImage(this.image, this.x, this.y, this.size, this.size);
   }
 }
 
-///////////////////////////////////////////////////////////////
+////////////////////////////////FIRE///////////////////////////
 
 export class Fire extends Particle {
   constructor(game, x, y) {
@@ -74,17 +87,30 @@ export class Fire extends Particle {
     this.va = Math.random() * 0.2 - 0.1;
   }
 
+  /**
+   * Update method for fire particles using math to randomize each particle
+   */
   update() {
     super.update();
     this.angle += this.va;
     this.x += Math.sin(this.angle * 5);
   }
 
+  /**
+   * Draw method for each fire particle
+   * @param {ctx} context
+   */
   draw(context) {
     context.save();
     context.translate(this.x, this.y);
     context.rotate(this.angle);
-    context.drawImage(this.image, -this.size * 0.5, -this.size * 0.5, this.size, this.size);
+    context.drawImage(
+      this.image,
+      -this.size * 0.5,
+      -this.size * 0.5,
+      this.size,
+      this.size
+    );
     context.restore();
   }
 }

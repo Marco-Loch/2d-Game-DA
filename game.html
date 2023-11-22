@@ -11,26 +11,67 @@
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
   </head>
   <body>
-
-    
     <div id="visDiv">
       <canvas id="canvas1" class="flexbox-item"> </canvas>
       <a id="restart_link" href="game.html">Neustart</a>
-      <div id="mobileControls" class="flexbox-item">
-        <div id="mobileControlsLeftScreen">
-          <button id="mobileControlsRight" class="mobileControlsButton"><img src="assets/img/move-right.png" width="50px" height="50px" alt=""></button>
-          <button id="mobileControlsLeft" class="mobileControlsButton"><img src="assets/img/move-left.png" width="50px" height="50px" alt=""></button>
+      <div id="mobileControls" class="flexbox-item, no-select">
+        <div id="mobileControlsLeftScreen" class="no-select">
+          <button
+            id="mobileControlsRight"
+            class="mobileControlsButton, no-select"
+          >
+            <img
+              src="assets/img/move-right.png"
+              width="50px"
+              height="50px"
+              alt=""
+            />
+          </button>
+          <button
+            id="mobileControlsLeft"
+            class="mobileControlsButton, no-select"
+          >
+            <img
+              src="assets/img/move-left.png"
+              width="50px"
+              height="50px"
+              alt=""
+            />
+          </button>
+          <button
+            id="fullScreenButton"
+            class="mobileControlsButton, no-select"
+            style="padding-left: 10%"
+          >
+            <img
+              src="assets/img/fullscreen.png"
+              width="50px"
+              height="50px"
+              alt=""
+            />
+          </button>
         </div>
-        <div id="mobileControlsRightScreen">
-          <button id="mobileControlsUp" class="mobileControlsButton"><img src="assets/img/jump.png" width="50px" height="50px" alt=""></button>
-          <button id="mobileControlsDown" class="mobileControlsButton"><img src="assets/img/dash.png" width="50px" height="50px" alt=""></button>
-          <button id="mobileControlsRoll" class="mobileControlsButton"><img src="assets/img/roll.png" width="50px" height="50px" alt=""></button>
+        <div id="mobileControlsRightScreen" class="no-select">
+          <button id="mobileControlsUp" class="mobileControlsButton, no-select">
+            <img src="assets/img/jump.png" width="50px" height="50px" alt="" />
+          </button>
+          <button
+            id="mobileControlsDown"
+            class="mobileControlsButton, no-select"
+          >
+            <img src="assets/img/dash.png" width="50px" height="50px" alt="" />
+          </button>
+          <button
+            id="mobileControlsRoll"
+            class="mobileControlsButton, no-select"
+          >
+            <img src="assets/img/roll.png" width="50px" height="50px" alt="" />
+          </button>
         </div>
       </div>
     </div>
 
-
-    <div id="images">
+    <div id="images" class="no-select">
       <img id="player" src="./assets/img/player.png" alt="" />
       <img id="layer1" src="./assets/img/Sky.png" alt="" />
       <img id="layer2" src="./assets/img/BG_Decor.png" alt="" />

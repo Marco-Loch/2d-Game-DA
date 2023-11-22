@@ -13,9 +13,14 @@ export class CollisionAnimation {
     this.maxFrame = 4;
     this.markedForDeletion = false;
     this.fps = 15;
-    this.frameInterval = 1000/this.fps;
+    this.frameInterval = 1000 / this.fps;
     this.frameTimer = 0;
   }
+
+  /**
+   * Draws the collision animation
+   * @param {ctx} context
+   */
   draw(context) {
     context.drawImage(
       this.image,
@@ -29,13 +34,18 @@ export class CollisionAnimation {
       this.height
     );
   }
-  update(deltaTime){
+
+  /**
+   * Updates the collision animation and marks them for deletion after it has reached its last frame time
+   * @param {Num} deltaTime
+   */
+  update(deltaTime) {
     this.x -= this.game.speed;
-    if (this.frameTimer > this.frameInterval){
-        this.frameX++;
-        this.frameTimer = 0;
+    if (this.frameTimer > this.frameInterval) {
+      this.frameX++;
+      this.frameTimer = 0;
     } else {
-        this.frameTimer += deltaTime;
+      this.frameTimer += deltaTime;
     }
     if (this.frameX > this.maxFrame) this.markedForDeletion = true;
   }

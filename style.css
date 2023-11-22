@@ -73,6 +73,9 @@ body {
 
 #visDiv {
     position: absolute;
+
+
+
     width: 760px;
     height: 480px;
     top: 50%;
@@ -117,13 +120,23 @@ body {
 }
 
 #mobileControls {
-    display: none;   
+    display: none;
     height: 25%;
     width: 100%;
     z-index: 999;
     position: relative;
     bottom: -45%;
     opacity: 0.5;
+}
+
+.no-select {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none;
+    -ms-touch-action: none;
 }
 
 #mobileControlsLeftScreen {
@@ -138,8 +151,8 @@ body {
 }
 
 .mobileControlsButton {
-   background-color: rgba(0,0,0,0);
-   border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
 }
 
 .mobileControlsButton:active {
@@ -154,6 +167,7 @@ body {
     #visDiv {
         height: 100vh;
     }
+
     #restart_link {
         top: 70%;
     }
@@ -163,6 +177,7 @@ body {
     #visDiv {
         width: 100%;
     }
+
     #mobileControls {
         width: 75%;
     }
