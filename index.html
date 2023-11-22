@@ -3,43 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crazy Dog</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="classes.js/drawable-Object.class.js"></script>
-    <script defer src="classes.js/movable-Object.class.js"></script>
-    <script defer src="classes.js/character.class.js"></script>
-    <script defer src="classes.js/weapon.class.js"></script>
-    <script defer src="classes.js/golem.class.js"></script>
-    <script defer src="classes.js/status-bar.class.js"></script>
-    <script defer src="classes.js/status-bar-background.class.js"></script>
-    <script defer src="classes.js/mana-bar.class.js"></script>
-    <script defer src="classes.js/world.class.js"></script>
-    <script defer src="classes.js/health-Coin.class.js"></script>
-    <script defer src="classes.js/mana-Coin.class.js"></script>
-    <script defer src="classes.js/ground.class.js"></script>
-    <script defer src="classes.js/background-layer1.class.js"></script>
-    <script defer src="classes.js/background-layer2.class.js"></script>
-    <script defer src="classes.js/background-Object.class.js"></script>
-    <script defer src="classes.js/fullscreen-control.class.js"></script>
-    <script defer src="classes.js/keyboard.class.js"></script>
-    <script defer src="classes.js/level.class.js"></script>
-    <script defer src="classes.js/endboss.class.js"></script>
-    <script defer src="classes.js/weapon-collision-box.class.js"></script>
-    <script defer src="js/game.js"></script>
-    <script defer src="levels/level1.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bangers&family=Economica&display=swap");
+    </style>
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-    <title>2d-Game-DA</title>
   </head>
-
   <body>
-    <h1 style="color: white;">Reaper in the Woods</h1>
-    <div id="game-div">
-      <!-- Canvas-->
-      <canvas id="canvas" width="720" height="480"> </canvas>
-      <div id="on-screen-buttons">
-        <div id="controls">
-          <button id="fullscreen-control" onclick="toggleFullscreen()"></button>
-        </div>
-      </div>
+    <div id="tutorialscreen">
+      <img id="tutorial_img" src="assets/img/tutorial.png" alt="" />
+      <a id="start_link" href="game.html" >Starte Spiel</a>
     </div>
   </body>
 </html>

@@ -1,3 +1,0 @@
-class RestartControl extends DrawableObject {
-    
-}

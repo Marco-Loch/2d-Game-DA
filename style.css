@@ -1,48 +1,106 @@
 body {
     height: 100dvh;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url('img/5_background/Cartoon_Forest_BG_01.png');
+    background-image: url('assets/img/Background.png');
     background-position-x: center;
     background-position-y: top;
     background-size: cover;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(5px);
 }
 
-canvas {
+#tutorialscreen {
     background-color: black;
-}
-
-.game-div {
-    position: relative;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.controls {
-    display: flex;
-    width: 100%;
-    justify-content: end;
-}
-
-.on-screen-buttons {
-    display: flex;
-    width: 720px;
-    height: 480px;
+    border: 5px solid black;
+    border-radius: 10px;
     position: absolute;
-    align-items: end;
-    bottom: 0px;
+    width: 760px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-#fullscreen-control {
-    height: 38px;
-    width: 38px;
-    background-image: url('img/1_buttons/fullscreen.png');
-    cursor: pointer;
+#tutorial_img {
+    position: relative;
+    top: -30px;
+    left: 20px;
+}
+
+#start_link {
+    font-family: Bangers;
+    font-size: xx-large;
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+#restart_link {
+    display: none;
+    font-family: Bangers;
+    font-size: xx-large;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+#restart_link:hover, #start_link:hover {
+    background-color: white;
+    color: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#visDiv {
+    position: absolute;
+    width: 760px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#canvas1 {
+    position: absolute;
+    border: 5px solid black;
+    border-radius: 10px;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#images {
+    display: none;
+}
+
+@media screen and (max-height: 400px) {
+    #restart_link {
+        top: 70%;
+    }
 }
