@@ -73,9 +73,6 @@ body {
 
 #visDiv {
     position: absolute;
-
-
-
     width: 760px;
     height: 480px;
     top: 50%;
@@ -146,7 +143,7 @@ body {
 
 #mobileControlsRightScreen {
     width: 40%;
-    padding-left: 5%;
+    padding-left: 10%;
 
 }
 
@@ -179,6 +176,13 @@ body {
     }
 
     #mobileControls {
-        width: 75%;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #mobileControls {
+        width: 100%;
+        padding-bottom: 30%;
     }
 }
