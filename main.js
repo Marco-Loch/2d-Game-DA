@@ -189,33 +189,27 @@ window.addEventListener("load", () => {
         .lock("landscape-primary")
         .then(() => {
           console.log("Bildschirmausrichtung im Querformat gesperrt.");
+          
         })
         .catch((error) => {
-          console.error(
-            "Fehler beim Sperren der Bildschirmausrichtung:",
-            error
-          );
-          console.log(isMobileDevice());
+          console.error("Fehler beim Sperren der Bildschirmausrichtung:", error);
         });
     }
   }
-
+  
+  function showMobileControls() {
+    const mobileControls = document.getElementById("mobileControls");
+    if (mobileControls) {
+      mobileControls.style.display = "flex";
+    }
+  }
+  
   if (isMobileDevice()) {
     lockLandscapeOrientation();
+    showMobileControls();
   }
+  
 });
 
-  ///////////////////////////////////////////////////////////////
 
 
-/*
-
-760/480 1.58
-1920/1080 1.78
-
-if window.innerwidth/window.innerheight > 760/480 ? use window.innerheight/480 ratio : window.innerwidth/760
-
-1200/800 1.5
-640/480 1.33
-
-*/

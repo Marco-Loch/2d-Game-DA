@@ -157,9 +157,6 @@ body {
     #restart_link {
         top: 70%;
     }
-    #mobileControls {
-        display: flex;
-    }
 }
 
 @media only screen and (max-width: 760px) {
@@ -168,6 +165,5 @@ body {
     }
     #mobileControls {
         width: 75%;
-        display: flex;
     }
 }

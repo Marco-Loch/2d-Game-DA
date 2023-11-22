@@ -78,7 +78,7 @@ export class InputHandler {
   }
 
   handleButtonAction(buttonType, action) {
-    console.log(`${buttonType} Button ${action}`);
+
     
     const mapping = {
       "left": "d",
