@@ -37,6 +37,17 @@ export class InputHandler {
       }
     });
 
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "w") this.game.sound.jump.play();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "m") {
+        this.game.musicEnabled = !this.game.musicEnabled;
+        this.game.music();
+        console.log(this.game.musicEnabled);
+      }
+    });
     ////////////////////////Mobile Controls///////////////////////////
 
     const rightButton = document.getElementById("mobileControlsRight");

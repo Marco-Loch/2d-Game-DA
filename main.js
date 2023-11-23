@@ -8,7 +8,6 @@ import {
   SpiderEnemy,
 } from "./classes/enemies.class.js";
 import { UI } from "./classes/ui.class.js";
-import { GameAudio } from "./classes/audio.class.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -18,10 +17,8 @@ window.addEventListener("load", () => {
   canvas.height = 480;
   const fullScreenButton = document.getElementById("fullScreenButton");
 
-  globalThis.muteGameSound = false;
-
   /**
-   * Creates an instance of the game 
+   * Creates an instance of the game
    */
   class Game {
     constructor(width, height) {
@@ -50,16 +47,39 @@ window.addEventListener("load", () => {
       this.gameOver = false;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
-      this.instantiateAudio();
-    }
-
-    instantiateAudio() {    
-      this.collisionAudio = new GameAudio('./assets/audio/hit.mp3', 0.2, true);
+      this.music = true;
+      this.sound = {
+        collision: new Howl({
+          src: "assets/audio/hit.mp3",
+          volume: 0.3,
+        }),
+        meteor: new Howl({
+          src: "assets/audio/Fire impact 1.wav",
+          volume: 0.3,
+        }),
+        spin: new Howl({
+          src: "assets/audio/spin.mp3",
+          volume: 0.01,
+        }),
+        jump: new Howl({
+          src: "assets/audio/jump.mp3",
+          volume: 0.3,
+        }),
+        attack: new Howl({
+          src: "assets/audio/Ice attack 2.wav",
+          volume: 0.5,
+        }),
+      };
+      this.music = new Howl({
+        src: ["assets/audio/music.mp3"],
+        volume: 0.05,
+        
+      });
     }
 
     /**
      * Updates the game class and all its object handlers
-     * @param {Num} deltaTime 
+     * @param {Num} deltaTime
      */
     update(deltaTime) {
       this.time += deltaTime;
@@ -73,7 +93,7 @@ window.addEventListener("load", () => {
     }
 
     /**
-     * Method to handle various particles 
+     * Method to handle various particles
      */
     handleParticles() {
       this.particles.forEach((particle, index) => {
@@ -87,7 +107,7 @@ window.addEventListener("load", () => {
 
     /**
      * Method to handle all enemies in the game
-     * @param {Num} deltaTime 
+     * @param {Num} deltaTime
      */
     handleEnemies(deltaTime) {
       if (this.enemyTimer > this.enemyInterval) {
@@ -106,11 +126,10 @@ window.addEventListener("load", () => {
 
     /**
      * Method to check if any collision is detected
-     * @param {Num} deltaTime 
+     * @param {Num} deltaTime
      */
     handleCollisions(deltaTime) {
       this.collisions.forEach((collision, index) => {
-        this.collisionAudio.play();
         collision.update(deltaTime);
         if (collision.markedForDeletion) this.collisions.splice(index, 1);
       });
@@ -118,7 +137,7 @@ window.addEventListener("load", () => {
 
     /**
      * Main draw method to display all visuals on the canvas
-     * @param {ctx} context 
+     * @param {ctx} context
      */
     draw(context) {
       this.background.draw(context);
@@ -144,6 +163,11 @@ window.addEventListener("load", () => {
         this.enemies.push(new GroundEnemy(this));
       else if (this.speed > 0) this.enemies.push(new SpiderEnemy(this));
       this.enemies.push(new FlyingEnemy(this));
+    }
+
+    music() {
+      if (this.game.musicEnabled) this.game.music.play();
+      else this.game.music.stop();
     }
   }
 
@@ -175,6 +199,8 @@ window.addEventListener("load", () => {
   }
 
   const highscore = getHighscore();
+  
+  
 
   ///////////////////////////////////////////////////////////////
 

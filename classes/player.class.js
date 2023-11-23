@@ -150,11 +150,13 @@ export class Player {
         if (
           this.currentState === this.states[4] ||
           this.currentState === this.states[5]
-        ) {
-          this.game.score++;
-        } else {
-          this.setState(6, 0);
-          this.game.score -= 5;
+          ) {
+            this.game.score++;
+            this.game.sound.attack.play();
+          } else {
+            this.setState(6, 0);
+            this.game.score -= 5;
+            this.game.sound.collision.play();
         }
       }
     });
