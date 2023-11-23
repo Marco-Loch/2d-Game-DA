@@ -54,7 +54,7 @@ window.addEventListener("load", () => {
     }
 
     instantiateAudio() {    
-      this.collisionAudio = new GameAudio('./assets/audio/hit.mp3', 0.2, false);
+      this.collisionAudio = new GameAudio('./assets/audio/hit.mp3', 0.2, true);
     }
 
     /**
