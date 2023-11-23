@@ -1,3 +1,4 @@
+import { GameAudio } from "./audio.class.js";
 
 /**
  * Creates a collision class

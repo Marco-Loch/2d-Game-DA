@@ -1,3 +1,5 @@
+import { GameAudio } from "./audio.class.js";
+
 /**
  * Creates a particle class
  */
@@ -5,6 +7,7 @@ class Particle {
   constructor(game) {
     this.game = game;
     this.markedForDeletion = false;
+    // this.instantiateAudio();
   }
 
   /**

@@ -8,6 +8,7 @@ import {
   SpiderEnemy,
 } from "./classes/enemies.class.js";
 import { UI } from "./classes/ui.class.js";
+import { GameAudio } from "./classes/audio.class.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -47,6 +48,11 @@ window.addEventListener("load", () => {
       this.gameOver = false;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
+      this.instantiateAudio();
+    }
+
+    instantiateAudio() {    
+      this.collisionAudio = new GameAudio('./assets/audio/hit.mp3', 0.2, false);
     }
 
     /**
@@ -102,6 +108,7 @@ window.addEventListener("load", () => {
      */
     handleCollisions(deltaTime) {
       this.collisions.forEach((collision, index) => {
+        this.collisionAudio.play();
         collision.update(deltaTime);
         if (collision.markedForDeletion) this.collisions.splice(index, 1);
       });

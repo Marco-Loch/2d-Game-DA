@@ -1,4 +1,5 @@
 import { Dust, Fire, Splash } from "./particles.class.js";
+import { GameAudio } from "./audio.class.js";
 
 const states = {
   SITTING: 0,
@@ -15,10 +16,17 @@ class State {
     this.state = state;
     this.game = game;
     this.jumpingHeight = 27;
+    this.instantiateAudio();
+  }
+
+  instantiateAudio() {
+    // this.rollAudio = new GameAudio('./assets/audio/...wav', 0.2, true);
+    this.meteorAudio = new GameAudio('./assets/audio/Fire impact 1.wav', 0.2, true);
+    this.jumpAudio = new GameAudio('./assets/audio/jump.mp3', 1.0, true);
   }
 }
 
-///////////////////////////////////////////////////////////////
+///////////////////////////SITTING/////////////////////////
 
 export class Sitting extends State {
   constructor(game) {
@@ -40,7 +48,7 @@ export class Sitting extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+//////////////////////////RUNNING/////////////////////////
 
 export class Running extends State {
   constructor(game) {
@@ -71,7 +79,7 @@ export class Running extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+////////////////////////////JUMPING/////////////////////////
 
 export class Jumping extends State {
   constructor(game) {
@@ -86,6 +94,7 @@ export class Jumping extends State {
   }
 
   handleInput(input) {
+    this.jumpAudio.play();
     this.game.particles.unshift(
       new Dust(
         this.game,
@@ -103,7 +112,7 @@ export class Jumping extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+///////////////////////////FALLING//////////////////////////
 
 export class Falling extends State {
   constructor(game) {
@@ -132,7 +141,7 @@ export class Falling extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+////////////////////////////ROLLING//////////////////////////
 
 export class Rolling extends State {
   constructor(game) {
@@ -169,7 +178,7 @@ export class Rolling extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+///////////////////////////DIVING//////////////////////////
 
 export class Diving extends State {
   constructor(game) {
@@ -193,6 +202,7 @@ export class Diving extends State {
     );
     if (this.game.player.onGround()) {
       this.game.player.setState(states.RUNNING, 1);
+      this.meteorAudio.play();
       for (let i = 0; i < 30; i++) {
         this.game.particles.unshift(
           new Splash(
@@ -208,7 +218,7 @@ export class Diving extends State {
   }
 }
 
-///////////////////////////////////////////////////////////////
+/////////////////////////////HIT///////////////////////////////
 
 export class Hit extends State {
   constructor(game) {
@@ -222,6 +232,7 @@ export class Hit extends State {
   }
 
   handleInput() {
+    
     if (this.game.player.frameX >= 10 && this.game.player.onGround()) {
       this.game.player.setState(states.RUNNING, 1);
     } else if (this.game.player.frameX >= 10 && !this.game.player.onGround()) {
