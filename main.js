@@ -18,6 +18,8 @@ window.addEventListener("load", () => {
   canvas.height = 480;
   const fullScreenButton = document.getElementById("fullScreenButton");
 
+  globalThis.muteGameSound = false;
+
   /**
    * Creates an instance of the game 
    */
