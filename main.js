@@ -73,7 +73,6 @@ window.addEventListener("load", () => {
       this.music = new Howl({
         src: ["assets/audio/music.mp3"],
         volume: 0.05,
-        
       });
     }
 
@@ -165,10 +164,19 @@ window.addEventListener("load", () => {
       this.enemies.push(new FlyingEnemy(this));
     }
 
-    music() {
-      if (this.game.musicEnabled) this.game.music.play();
-      else this.game.music.stop();
+    toggleMusic() {
+      if (this.musicEnabled) {
+        this.music.play();
+      } else {
+        this.music.pause();
+      }
     }
+
+    toggleMute() {
+      Howler.mute(!Howler._muted);
+    }
+
+    
   }
 
   ///////////////////////////////////////////////////////////////
@@ -199,8 +207,6 @@ window.addEventListener("load", () => {
   }
 
   const highscore = getHighscore();
-  
-  
 
   ///////////////////////////////////////////////////////////////
 
@@ -254,6 +260,25 @@ window.addEventListener("load", () => {
   ///////////////////////////////////////////////////////////////
 
   /**
+   * Testing the Screen orientation for Mobile browsers
+   */
+  function checkOrientation() {
+    const orientation =
+      window.screen.orientation ||
+      window.screen.mozOrientation ||
+      window.screen.msOrientation;
+    if (orientation.type.includes("portrait")) {
+      alert(
+        "Bitte drehen Sie Ihr Gerät für das beste Spielerlebnis."
+      );
+    }
+  }
+
+  window.addEventListener("orientationchange", checkOrientation);
+
+  window.addEventListener("load", checkOrientation);
+
+  /**
    * Mobile Browser check
    * @returns true oder false
    */
@@ -296,4 +321,16 @@ window.addEventListener("load", () => {
     lockLandscapeOrientation();
     showMobileControls();
   }
+
+  const musicToggleBtn = document.getElementById("musicToggle");
+  musicToggleBtn.addEventListener("click", () => {
+    game.musicEnabled = !game.musicEnabled;
+    game.toggleMusic();
+    console.log(game.musicEnabled);
+  });
+
+  const muteToggleBtn = document.getElementById("muteToggle");
+  muteToggleBtn.addEventListener("click", () => {
+    game.toggleMute();
+  });
 });

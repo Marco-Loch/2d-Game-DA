@@ -44,7 +44,7 @@ export class InputHandler {
     window.addEventListener("keydown", (e) => {
       if (e.key === "m") {
         this.game.musicEnabled = !this.game.musicEnabled;
-        // this.game.music();
+        this.game.toggleMusic(); 
         console.log(this.game.musicEnabled);
       }
     });
