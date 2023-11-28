@@ -72,6 +72,7 @@ window.addEventListener("load", () => {
       };
       this.music = new Howl({
         src: ["assets/audio/music.mp3"],
+        autoplay: true,
         volume: 0.05,
       });
     }
@@ -164,6 +165,9 @@ window.addEventListener("load", () => {
       this.enemies.push(new FlyingEnemy(this));
     }
 
+    /**
+     * Method to toggle Music on/off
+     */
     toggleMusic() {
       if (this.musicEnabled) {
         this.music.play();
@@ -172,6 +176,9 @@ window.addEventListener("load", () => {
       }
     }
 
+    /**
+     * Method to mute all sounds using Howler.js
+     */
     toggleMute() {
       Howler.mute(!Howler._muted);
     }
@@ -225,6 +232,10 @@ window.addEventListener("load", () => {
     }
   }
 
+
+  /**
+   * Eventlistener for Fullscreen Key "f"
+   */
   document.addEventListener(
     "keydown",
     (e) => {
@@ -235,6 +246,9 @@ window.addEventListener("load", () => {
     false
   );
 
+  /**
+   * Eventlistener for the Fullscreen button
+   */
   fullScreenButton.addEventListener("click", () => {
     toggleFullScreen();
     lockLandscapeOrientation();
@@ -269,7 +283,7 @@ window.addEventListener("load", () => {
       window.screen.msOrientation;
     if (orientation.type.includes("portrait")) {
       alert(
-        "Bitte drehen Sie Ihr Gerät für das beste Spielerlebnis."
+        "Bitte drehe dein Gerät für das beste Spielerlebnis."
       );
     }
   }
@@ -322,13 +336,20 @@ window.addEventListener("load", () => {
     showMobileControls();
   }
 
+
+  /**
+   * Eventlistener for the toggle Music button
+   */
   const musicToggleBtn = document.getElementById("musicToggle");
   musicToggleBtn.addEventListener("click", () => {
     game.musicEnabled = !game.musicEnabled;
     game.toggleMusic();
-    console.log(game.musicEnabled);
   });
 
+
+  /**
+   * Eventlistener for the toggle Mute button
+   */
   const muteToggleBtn = document.getElementById("muteToggle");
   muteToggleBtn.addEventListener("click", () => {
     game.toggleMute();

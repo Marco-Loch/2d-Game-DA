@@ -37,15 +37,31 @@ export class InputHandler {
       }
     });
 
+    /**
+     * Eventlistener for the jump sound
+     */
     window.addEventListener("keydown", (e) => {
       if (e.key === "w") this.game.sound.jump.play();
     });
 
+    /**
+     * Eventlistener for the toggle Musik key
+     */
     window.addEventListener("keydown", (e) => {
       if (e.key === "m") {
         this.game.musicEnabled = !this.game.musicEnabled;
         this.game.toggleMusic(); 
-        console.log(this.game.musicEnabled);
+      }
+    });
+
+
+    /**
+     * Eventlistener for the toggle Mute key
+     */
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "n") {
+        this.game.soundEnabled = !this.game.soundEnabled;
+        this.game.toggleMute(); 
       }
     });
     ////////////////////////Mobile Controls///////////////////////////
